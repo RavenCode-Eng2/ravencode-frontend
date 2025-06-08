@@ -1,12 +1,43 @@
-# React + Vite
+# RavenCode 🦉
+RavenCode es una plataforma de aprendizaje interactiva pensada para enseñar programación a adolescentes de 12 a 16 años. Integra módulos secuenciales, un editor de código, gamificación y seguimiento personalizado del progreso, todo en un entorno visualmente atractivo y accesible.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Objetivo
 
-Currently, two official plugins are available:
+Facilitar el aprendizaje de la programación desde una edad temprana, superando barreras como la falta de retroalimentación inmediata, la escasez de docentes especializados y entornos poco amigables para principiantes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 ¿Cómo ejecutar el módulo?
+### 🌐 Frontend – React + Vite
+1. Ir a la carpeta del frontend:
+```bash
+   cd ravencode-frontend
+```
+2. Instalar dependencias: 
+```bash
+   npm install
+```
+3. Levantar el servidor:
+```bash
+   npm run dev
+```
+4. Acceder en el navegador:
+http://localhost:5173
 
-## Expanding the ESLint configuration
+### 👥 Equipo de desarrollo
+Proyecto desarrollado por el equipo Cuervos en el curso Ingeniería de Software II – Universidad Nacional de Colombia.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Diego Felipe Solorzano Aponte
+
+* Laura Valentina Pabon Cabezas
+
+* Diana Valentina Chicuasuque Rodríguez
+
+* Carlos Arturo Murcia Andrade
+
+* Sergio Esteban Rendon Umbarila
+
+* Mateo Andrés Vivas Acosta
+
+* Jorge Andrés Torres Leal
+
+#### Docente: Ing. Camilo Ernesto Vargas Romero
+#### Semestre: 2025-1
