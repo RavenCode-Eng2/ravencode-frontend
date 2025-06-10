@@ -20,7 +20,7 @@ Facilitar el aprendizaje de la programación desde una edad temprana, superando 
    npm run dev
 ```
 4. Acceder en el navegador:
-http://localhost:5173
+http://localhost:3000
 
 ### 👥 Equipo de desarrollo
 Proyecto desarrollado por el equipo Cuervos en el curso Ingeniería de Software II – Universidad Nacional de Colombia.
