@@ -40,3 +40,24 @@
 .read-the-docs {
   color: #888;
 }
+
+.console-container {
+  margin-top: 20px;
+}
+
+.console-box code {
+  background-color: #2e2e2e;
+  /* Fondo oscuro tipo terminal */
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  /* Sombra para un efecto más realista */
+  border: 2px solid #444;
+  /* Borde de la caja */
+  overflow-x: auto;
+  /* Para permitir desplazamiento horizontal si el código es largo */
+  color: #ffffff;
+  /* Asegura que el texto sea blanco */
+  text-decoration: none;
+  font-size: 20px;
+}
