@@ -17,7 +17,12 @@ interface PageWithEditorsProps {}
 const questions = [
   {
     question: "¿Qué es una variable en Python?",
-    options: ["Un tipo de dato", "Un contenedor de datos", "Un operador", "Una función"],
+    options: [
+      "Un tipo de dato",
+      "Un contenedor de datos",
+      "Un operador",
+      "Una función",
+    ],
     answer: "Un contenedor de datos",
   },
   {
@@ -41,9 +46,33 @@ const questions = [
     answer: "10.0",
   },
   {
-    question: "¿Qué devuelve la función type() en Python?",
-    options: ["El valor de la variable", "El tipo de dato de la variable", "La longitud de la variable", "Nada"],
-    answer: "El tipo de dato de la variable",
+    question:
+      "Imagina que tienes el siguiente programa. ¿Cuál es la salida del programa al ejecutarlo",
+    description: (
+      <div className="console-container">
+        <div className="console-box">
+          <SyntaxHighlighter language="python" style={monokai}>
+            {`a = 5 
+ b = 2
+ suma = a + b # 7 
+ resta = a - b # 3 
+ multiplicacion = a * b # 10 
+ division = a / b # 2.5 
+ entera = a // b # 2 
+ modulo = a % b # 1 
+ exponente = a ** b # 25`}
+          </SyntaxHighlighter>
+        </div>
+      </div>
+    ),
+    options: [
+      "El programa imprime: El resultado es 105",
+      "El programa imprime: El resultado es 50",
+      "El programa arroja un error porque la función print no se llama de manera correcta",
+      "El programa arroja un error porque no es posible efectuar la operación propuesta entre a y b",
+    ],
+    answer:
+      "El programa arroja un error porque no es posible efectuar la operación propuesta entre a y b",
   },
   {
     question: "¿Qué operador se utiliza para la división en Python?",
@@ -56,7 +85,8 @@ const questions = [
     answer: "int()",
   },
   {
-    question: "¿Cuál es el valor de la variable después de la operación x = '10' + 5?",
+    question:
+      "¿Cuál es el valor de la variable después de la operación x = '10' + 5?",
     options: ["'105'", "15", "'15'", "Error"],
     answer: "Error",
   },
@@ -123,6 +153,10 @@ const Assesment1: React.FC<ExamProps> = () => {
                   <h3 className="text-white text-lg font-bold tracking-[-0.015em] px-4 pb-2 pt-4">
                     {question.question}
                   </h3>
+                  {/* Mostrar la descripción si existe */}
+                  {question.description && (
+                    <div className="px-4">{question.description}</div>
+                  )}
                   <div className="px-4">
                     {question.options.map((option, optionIndex) => (
                       <div key={optionIndex} className="mb-2">
@@ -143,6 +177,7 @@ const Assesment1: React.FC<ExamProps> = () => {
                 </div>
               ))}
             </form>
+
             <div className="mt-8 flex justify-between">
               <Button
                 size="md"
@@ -168,7 +203,9 @@ const Assesment1: React.FC<ExamProps> = () => {
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded-lg text-center w-80">
-            <h2 className="text-2xl font-bold text-black mb-4">Resultado del Examen</h2>
+            <h2 className="text-2xl font-bold text-black mb-4">
+              Resultado del Examen
+            </h2>
             <p className="text-lg text-black mb-4">{modalMessage}</p>
             <Button
               size="md"
