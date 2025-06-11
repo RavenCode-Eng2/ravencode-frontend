@@ -7,6 +7,7 @@ import Courses from './pages/Courses';
 import MyCourses from './pages/MyCourses';
 import NotFound from './pages/NotFound';
 import Layout from './components/Layout';
+import ForgotPassword from './pages/ForgotPassword';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -38,6 +39,7 @@ function App() {
                     <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
                     <Route path="/register" element={<PublicLayout><Register /></PublicLayout>} />
                     <Route path="/courses" element={<PublicLayout><Courses /></PublicLayout>} />
+                    <Route path="/forgot-password" element={<PublicLayout><ForgotPassword /></PublicLayout>} />
 
                     {/* Protected routes with dashboard layout */}
                     <Route path="/dashboard" element={
