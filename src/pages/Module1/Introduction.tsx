@@ -3,15 +3,20 @@ import { theme } from "../../theme";
 import Button from "../../components/Button"; 
 import objetivos_image from "../../assets/images/objetivos.png";
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 
 
 const Introduction = () => {
+  useEffect(() => {
+    // Al montar el componente, llevar el scroll a la parte superior
+    window.scrollTo(0, 0);
+  }, []); // Este efecto solo se ejecutará una vez al montar el componente
+
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('/lesson1'); 
+    navigate("/lesson1");
   };
-
 
   return (
     <div
@@ -27,7 +32,7 @@ const Introduction = () => {
             <div className="flex flex-wrap gap-2 p-4">
               <Link
                 className="text-[#8e99cc] text-base font-medium leading-normal"
-                to= "/courses"
+                to="/courses"
               >
                 Fundamentos de Python
               </Link>
@@ -38,17 +43,24 @@ const Introduction = () => {
                 Introducción
               </span>
             </div>
-             <div className="flex flex-col gap-8 text-center mt-16">
-                <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em]">
-                  Bienvenido/a al mundo de la programación!
-                </h1>
-                <h2 className="text-white text-lg font-normal leading-normal text-justify">
-                  En este espacio encontrarás herramientas que te ayudarán a dar tus primeros pasos en el mundo de la programación. Nuestro objetivo no es solo que aprendas, sino que descubras lo fascinante y útil que puede ser programar. A lo largo del curso trabajaremos con dos lenguajes muy populares: Python y JavaScript. Comenzaremos con Python, un lenguaje ideal para principiantes por su claridad y simplicidad.
-                </h2>
-                <h3 className="text-white text-lg font-normal leading-normal text-justify">
-                    En este primer módulo aprenderás los fundamentos esenciales para comenzar a escribir tus propios programas.
-                </h3>
-              </div>
+            <div className="flex flex-col gap-8 text-center mt-16">
+              <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em]">
+                Bienvenido/a al mundo de la programación!
+              </h1>
+              <h2 className="text-white text-lg font-normal leading-normal text-justify">
+                En este espacio encontrarás herramientas que te ayudarán a dar
+                tus primeros pasos en el mundo de la programación. Nuestro
+                objetivo no es solo que aprendas, sino que descubras lo
+                fascinante y útil que puede ser programar. A lo largo del curso
+                trabajaremos con dos lenguajes muy populares: Python y
+                JavaScript. Comenzaremos con Python, un lenguaje ideal para
+                principiantes por su claridad y simplicidad.
+              </h2>
+              <h3 className="text-white text-lg font-normal leading-normal text-justify">
+                En este primer módulo aprenderás los fundamentos esenciales para
+                comenzar a escribir tus propios programas.
+              </h3>
+            </div>
             <div
               className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-center justify-center p-4"
               style={{
@@ -57,24 +69,26 @@ const Introduction = () => {
                 backgroundPosition: "center", // Centra la imagen dentro del contenedor
                 marginTop: "20px", // Ajusta la posición de la imagen
               }}
-            >
-            </div>
+            ></div>
 
             <h2 className="text-white text-[25px] font-bold leading-tight tracking-[-0.015em] px-3 pb-3 pt-5">
               Objetivos
             </h2>
             <p className="text-white text-lg font-normal leading-normal pb-3 pt-1 px-4">
-              El objetivo de este módulo es que entiendas que es programar y que entiendas la sintaxis básica de Python.  Para lograrlo, abordaremos los siguientes temas distribuidos en 5 lecciones:
+              El objetivo de este módulo es que entiendas que es programar y que
+              entiendas la sintaxis básica de Python. Para lograrlo, abordaremos
+              los siguientes temas distribuidos en 5 lecciones:
             </p>
             <ul className="list-disc pl-8 text-white text-lg font-normal leading-normal mb-4">
-                <li>¿Qué es programar? ¿Qué es Python?</li>
-                <li>¿Cómo descargar e instalar python?</li>
-                <li>Entrada del usuario, salidas del programa y comentarios.</li>
-                <li>Variables y tipos de datos (int, float, str, bool)</li>
-                <li>Operaciones y expresiones</li>
+              <li>¿Qué es programar? ¿Qué es Python?</li>
+              <li>¿Cómo descargar e instalar python?</li>
+              <li>Entrada del usuario, salidas del programa y comentarios.</li>
+              <li>Variables y tipos de datos (int, float, str, bool)</li>
+              <li>Operaciones y expresiones</li>
             </ul>
             <p className="text-white text-lg font-normal leading-normal pb-3 pt-1 px-4 mb-4">
-              Al finalizar, pondrás a prueba lo aprendido a través de un examen que te ayudará a reforzar tus conocimientos.
+              Al finalizar, pondrás a prueba lo aprendido a través de un examen
+              que te ayudará a reforzar tus conocimientos.
             </p>
             <p className="text-white text-lg font-normal leading-normal pb-3 pt-1 px-4 mb-4">
               ¡Comencemos tu camino en el mundo de la programación con Python!
@@ -94,15 +108,15 @@ const Introduction = () => {
             </div>
 
             <div className="mt-8">
-                <Button
-                  size="md"
-                  variant="primary"
-                  className="w-full px-6 py-3 text-base font-bold leading-normal"
-                  onClick={handleButtonClick}
-                >
-                  Inicia tu aprendizaje
-                </Button>
-              </div>
+              <Button
+                size="md"
+                variant="primary"
+                className="w-full px-6 py-3 text-base font-bold leading-normal"
+                onClick={handleButtonClick}
+              >
+                Inicia tu aprendizaje
+              </Button>
+            </div>
           </div>
         </div>
       </div>

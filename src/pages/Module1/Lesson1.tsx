@@ -8,9 +8,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../../App.css'; 
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';  // Importa el resaltado de sintaxis
 import { monokai} from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { useEffect } from "react";
 
 
 const Lesson1 = () => {
+
+  useEffect(() => {
+      // Al montar el componente, llevar el scroll a la parte superior
+      window.scrollTo(0, 0);
+    }, []); // Este efecto solo se ejecutará una vez al montar el componente
+  
    const navigate = useNavigate();
 
    const handleButtonClick = () => {

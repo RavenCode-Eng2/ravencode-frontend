@@ -5,6 +5,9 @@ import oper_aritm from "../../assets/images/oper_aritmet.png";
 import oper_comp from "../../assets/images/oper_comp.png";
 import oper_logic from "../../assets/images/oper_logicos.png";
 import operacion from "../../assets/images/operacion.png";
+import { Link, useNavigate } from 'react-router-dom'; 
+import { useEffect } from "react";
+
 
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter"; // Importa el resaltado de sintaxis
 import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -13,6 +16,12 @@ import EditorContainer from "../../components/CodeMirror/EditorContainer";
 interface PageWithEditorsProps {}
 
 const Lesson5: React.FC<PageWithEditorsProps> = () => {
+
+  useEffect(() => {
+      // Al montar el componente, llevar el scroll a la parte superior
+      window.scrollTo(0, 0);
+    }, []); // Este efecto solo se ejecutará una vez al montar el componente
+  
   // Estado para los códigos en los editores
   const [currentCode1, setCurrentCode1] = useState<string>(`
     `);
@@ -34,21 +43,35 @@ const Lesson5: React.FC<PageWithEditorsProps> = () => {
   const editorSize2 = { width: "100px", height: "40px" };
   const consoleSize2 = { width: "100px", height: "15px" };
 
+
+  const navigate = useNavigate();
+  
+     const handleButtonClick = () => {
+          navigate('/lesson4'); 
+      };
+  
+     const handleButtonClick1 = () => {
+          navigate('/lesson5')
+      };
+  
   return (
     <div
-      className="relative flex size-full min-h-screen flex-col bg-[#14161f] dark group/design-root overflow-x-hidden"
-      style={{ fontFamily: 'Lexend, "Noto Sans", sans-serif' }}
+      className="relative flex min-h-screen flex-col"
+            style={{
+              background: theme.colors.background.main,
+              fontFamily: theme.typography.fontFamily,
+            }}
     >
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="flex flex-wrap gap-2 p-4">
-              <a
-                className="text-[#9ba1bf] text-base font-medium leading-normal"
-                href="#"
-              >
-                Fundamentos de python
-              </a>
+              <Link
+                  className="text-[#8e99cc] text-base font-medium leading-normal"
+                  to= "/courses"
+                  >
+                  Fundamentos de Python
+                  </Link>        
               <span className="text-[#9ba1bf] text-base font-medium leading-normal">
                 /
               </span>
@@ -353,6 +376,29 @@ const Lesson5: React.FC<PageWithEditorsProps> = () => {
                 </div>
               </div>
             </p>
+            <div className="mt-8 flex justify-between">
+              <div className="mt-8 text-left">
+                <Button
+                  size="md"
+                  variant="primary"
+                  className=" px-6 py-3 text-base font-bold leading-normal"
+                  onClick={handleButtonClick}
+                >
+                  Anterior
+                </Button>
+              </div>
+
+              <div className="mt-8 text-right">
+                <Button
+                  size="md"
+                  variant="primary"
+                  className=" px-6 py-3 text-base font-bold leading-normal"
+                  onClick={handleButtonClick1}
+                >
+                  Empezar evaluación
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

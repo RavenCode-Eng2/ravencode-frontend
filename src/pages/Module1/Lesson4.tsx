@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { theme } from "../../theme";
 import Button from "../../components/Button"; // Asegúrate de tener el componente Button
 import tipos_datos from "../../assets/images/tipos_datos.png";
@@ -6,13 +6,18 @@ import { Light as SyntaxHighlighter } from "react-syntax-highlighter"; // Import
 import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { Link, useNavigate } from 'react-router-dom'; 
 import EditorContainer from "../../components/CodeMirror/EditorContainer";
+import { useEffect } from "react";
 
 interface PageWithEditorsProps {}
 
 const Lesson4: React.FC<PageWithEditorsProps> = () => {
+  useEffect(() => {
+    // Al montar el componente, llevar el scroll a la parte superior
+    window.scrollTo(0, 0);
+  }, []); // Este efecto solo se ejecutará una vez al montar el componente
+
   // Estado para los códigos en los editores
-  const [currentCode1, setCurrentCode1] =
-    useState<string>(`
+  const [currentCode1, setCurrentCode1] = useState<string>(`
     `);
   const [currentCode2, setCurrentCode2] = useState<string>(
     'print("Hello, Second Editor!")'
@@ -34,19 +39,21 @@ const Lesson4: React.FC<PageWithEditorsProps> = () => {
 
   const navigate = useNavigate();
 
-   const handleButtonClick = () => {
-        navigate('/lesson3'); 
-    };
+  const handleButtonClick = () => {
+    navigate("/lesson3");
+  };
 
-   const handleButtonClick1 = () => {
-        navigate('/lesson1')
-    };
-
+  const handleButtonClick1 = () => {
+    navigate("/lesson5");
+  };
 
   return (
     <div
-      className="relative flex size-full min-h-screen flex-col bg-[#101323] dark group/design-root overflow-x-hidden"
-      style={{ fontFamily: 'Lexend, "Noto Sans", sans-serif' }}
+      className="relative flex min-h-screen flex-col"
+      style={{
+        background: theme.colors.background.main,
+        fontFamily: theme.typography.fontFamily,
+      }}
     >
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
@@ -54,7 +61,7 @@ const Lesson4: React.FC<PageWithEditorsProps> = () => {
             <div className="flex flex-wrap gap-2 p-4">
               <Link
                 className="text-[#8e99cc] text-base font-medium leading-normal"
-                to= "/courses"
+                to="/courses"
               >
                 Fundamentos de Python
               </Link>

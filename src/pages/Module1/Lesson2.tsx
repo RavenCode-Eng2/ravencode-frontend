@@ -12,9 +12,16 @@ import VS6 from "../../assets/images/VS6.png";
 import VS7 from "../../assets/images/VS7.png";
 import VS8 from "../../assets/images/VS8.png";
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 
 
 const Lesson2 = () => {
+
+  useEffect(() => {
+      // Al montar el componente, llevar el scroll a la parte superior
+      window.scrollTo(0, 0);
+    }, []); // Este efecto solo se ejecutará una vez al montar el componente
+  
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
