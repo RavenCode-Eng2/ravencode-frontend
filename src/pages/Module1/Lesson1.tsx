@@ -1,9 +1,31 @@
-import React from "react";
+
+import React, { useState } from 'react';
 import { theme } from "../../theme";
 import Button from "../../components/Button"; // Asegúrate de tener el componente Button
 import program from "../../assets/images/programacion.png";
+import EditorContainer from "../../components/CodeMirror/EditorContainer";
 
-const Lesson1 = () => {
+interface PageWithEditorsProps {}
+
+
+const Lesson1: React.FC<PageWithEditorsProps> = () => {
+  // Estado para los códigos en los editores
+  const [currentCode1, setCurrentCode1] = useState<string>(`print("Hello, First Editor!")
+print("valentina hermosa")
+`);
+  const [currentCode2, setCurrentCode2] = useState<string>('print("Hello, Second Editor!")');
+  
+  // Estado para el lenguaje y tema
+  const [currentLanguage, setCurrentLanguage] = useState<string>('python');
+  const [currentTheme, setCurrentTheme] = useState<{ value: string, label: string }>({ value: 'githubDark', label: 'GitHub Dark' });
+
+  // Tamaños para los editores y consolas
+  const editorSize1 = { width: '950px', height: '100px' };  
+  const consoleSize1 = { width: '950px', height: '150px' };
+
+  const editorSize2 = { width: '100px', height: '40px' };  
+  const consoleSize2 = { width: '100px', height: '15px' };
+
   return (
     <div
       className="relative flex min-h-screen flex-col"
@@ -26,6 +48,16 @@ const Lesson1 = () => {
                   La programación hace referencia a la actividad de escribir un conjunto de instrucciones (un programa) para que el computador las pueda ejecutar. Por ejemplo, el siguiente es un ejemplo del que suele ser el primer programa que la mayoría de los programadores escribe.
                 </h2>
               </div>
+              <EditorContainer
+                currentCode={currentCode1}
+                setCurrentCode={setCurrentCode1}
+                currentLanguage={currentLanguage}
+                setCurrentLanguage={setCurrentLanguage}
+                currentTheme={currentTheme}
+                setCurrentTheme={setCurrentTheme}
+                editorSize={editorSize1}  
+                consoleSize={consoleSize1}  
+              />
             <div
               className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-center justify-center p-4"
               style={{
@@ -78,6 +110,7 @@ const Lesson1 = () => {
                 </div>
                 
               </div>
+              
 
               <div className="flex flex-1 gap-3 rounded-lg border border-[#2f396a] bg-[#181d35] p-4 flex-col">
                 <div className="text-white">
