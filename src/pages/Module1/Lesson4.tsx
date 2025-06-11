@@ -4,7 +4,7 @@ import Button from "../../components/Button"; // Asegúrate de tener el componen
 import tipos_datos from "../../assets/images/tipos_datos.png";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter"; // Importa el resaltado de sintaxis
 import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
-
+import { Link, useNavigate } from 'react-router-dom'; 
 import EditorContainer from "../../components/CodeMirror/EditorContainer";
 
 interface PageWithEditorsProps {}
@@ -32,6 +32,17 @@ const Lesson4: React.FC<PageWithEditorsProps> = () => {
   const editorSize2 = { width: "100px", height: "40px" };
   const consoleSize2 = { width: "100px", height: "15px" };
 
+  const navigate = useNavigate();
+
+   const handleButtonClick = () => {
+        navigate('/lesson3'); 
+    };
+
+   const handleButtonClick1 = () => {
+        navigate('/lesson1')
+    };
+
+
   return (
     <div
       className="relative flex size-full min-h-screen flex-col bg-[#101323] dark group/design-root overflow-x-hidden"
@@ -41,12 +52,12 @@ const Lesson4: React.FC<PageWithEditorsProps> = () => {
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="flex flex-wrap gap-2 p-4">
-              <a
+              <Link
                 className="text-[#8e99cc] text-base font-medium leading-normal"
-                href="#"
+                to= "/courses"
               >
-                Python Basics
-              </a>
+                Fundamentos de Python
+              </Link>
               <span className="text-[#8e99cc] text-base font-medium leading-normal">
                 /
               </span>
@@ -55,7 +66,7 @@ const Lesson4: React.FC<PageWithEditorsProps> = () => {
               </span>
             </div>
             <h1 className="text-white tracking-light text-[35px] font-bold leading-tight px-4 text-left pb-3 pt-5">
-              Variables y tipos de datos
+              Lección 4: Variables y tipos de datos
             </h1>
             <h2 className="text-white tracking-light text-[25px] font-bold leading-tight px-4 text-left pb-3 pt-5">
               Variables
@@ -476,8 +487,9 @@ print("La variable aprobado es de tipo :", type(aprobado))
                   size="md"
                   variant="primary"
                   className=" px-6 py-3 text-base font-bold leading-normal"
+                  onClick={handleButtonClick}
                 >
-                  Siguiente
+                  Anterior
                 </Button>
               </div>
 
@@ -486,8 +498,9 @@ print("La variable aprobado es de tipo :", type(aprobado))
                   size="md"
                   variant="primary"
                   className=" px-6 py-3 text-base font-bold leading-normal"
+                  onClick={handleButtonClick1}
                 >
-                  Anterior
+                  Siguiente
                 </Button>
               </div>
             </div>

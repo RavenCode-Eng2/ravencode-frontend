@@ -11,7 +11,7 @@ import VS5 from "../../assets/images/VS5.png";
 import VS6 from "../../assets/images/VS6.png";
 import VS7 from "../../assets/images/VS7.png";
 import VS8 from "../../assets/images/VS8.png";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Lesson2 = () => {
@@ -37,10 +37,24 @@ const Lesson2 = () => {
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div className="flex flex-wrap gap-2 p-4">
+              <Link
+                className="text-[#8e99cc] text-base font-medium leading-normal"
+                to= "/courses"
+              >
+                Fundamentos de Python
+              </Link>
+              <span className="text-[#8e99cc] text-base font-medium leading-normal">
+                /
+              </span>
+              <span className="text-white text-base font-medium leading-normal">
+                ¿Cómo descargar e instalar python?
+              </span>
+            </div>
              <div className="flex flex-col gap-8 text-center mt-16">
-                <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em]">
-                  Lección 2
-                </h1>
+                <h1 className="text-white tracking-light text-[35px] font-bold leading-tight text-left pb-3 pt-5">
+              Lección 2: ¿Cómo descargar e instalar python?
+               </h1>
                 <h3 className="text-white text-2xl font-black leading-tight tracking-[-0.033em] text-left">
                     ¿Cómo descargar e instalar python?
                 </h3>
