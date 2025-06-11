@@ -2,7 +2,7 @@ import React from "react";
 import { theme } from "../../theme";
 import Button from "../../components/Button"; 
 import objetivos_image from "../../assets/images/objetivos.png";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Introduction = () => {
@@ -24,6 +24,20 @@ const Introduction = () => {
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div className="flex flex-wrap gap-2 p-4">
+              <Link
+                className="text-[#8e99cc] text-base font-medium leading-normal"
+                to= "/courses"
+              >
+                Fundamentos de Python
+              </Link>
+              <span className="text-[#8e99cc] text-base font-medium leading-normal">
+                /
+              </span>
+              <span className="text-white text-base font-medium leading-normal">
+                Introducción
+              </span>
+            </div>
              <div className="flex flex-col gap-8 text-center mt-16">
                 <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em]">
                   Bienvenido/a al mundo de la programación!
