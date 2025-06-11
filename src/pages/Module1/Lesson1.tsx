@@ -1,7 +1,9 @@
-import React from "react";
+
+import React, { useState } from 'react';
 import { theme } from "../../theme";
 import Button from "../../components/Button"; // Asegúrate de tener el componente Button
 import program from "../../assets/images/programacion.png";
+
 import { useNavigate } from 'react-router-dom';
 import '../../App.css'; 
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';  // Importa el resaltado de sintaxis
@@ -22,6 +24,7 @@ const Lesson1 = () => {
 
 
     return (
+
     <div
       className="relative flex min-h-screen flex-col"
       style={{
@@ -43,6 +46,7 @@ const Lesson1 = () => {
                   La programación hace referencia a la actividad de escribir un conjunto de instrucciones (un programa) para que el computador las pueda ejecutar. Por ejemplo, el siguiente es un ejemplo del que suele ser el primer programa que la mayoría de los programadores escribe.
                 </h2>
               </div>
+
               <div className="console-container">
                 <div className="console-box">
                     <SyntaxHighlighter language="python" style={monokai}>
@@ -52,6 +56,7 @@ const Lesson1 = () => {
                 </div>
               </div>
               
+
             <div
               className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-center justify-center p-4"
               style={{
@@ -104,6 +109,7 @@ const Lesson1 = () => {
                 </div>
                 
               </div>
+              
 
               <div className="flex flex-1 gap-3 rounded-lg border border-[#2f396a] bg-[#181d35] p-4 flex-col">
                 <div className="text-white">
