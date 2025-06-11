@@ -14,6 +14,8 @@ import Lesson2 from './pages/Module1/Lesson2';
 import Lesson3 from './pages/Module1/Lesson3';
 
 import Lesson4 from './pages/Module1/Lesson4';
+import Lesson5 from "./pages/Module1/Lesson5";
+
 
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -54,7 +56,8 @@ function App() {
 
 
                     <Route path="/lesson4" element={<PublicLayout><Lesson4 /></PublicLayout>} />
-    
+                    <Route path="/lesson5" element={<PublicLayout><Lesson5 /></PublicLayout>} />
+
 
                     {/* Protected routes with dashboard layout */}
                     <Route path="/dashboard" element={
