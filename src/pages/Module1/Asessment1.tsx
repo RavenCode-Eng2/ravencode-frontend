@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { theme } from "../../theme";
 import Button from "../../components/Button"; // Asegúrate de que tienes el componente Button
-import oper_aritm from "../../assets/images/oper_aritmet.png";
-import oper_comp from "../../assets/images/oper_comp.png";
-import oper_logic from "../../assets/images/oper_logicos.png";
-import operacion from "../../assets/images/operacion.png";
 import { Link, useNavigate } from 'react-router-dom'; 
 import { useEffect } from "react";
 
@@ -16,34 +12,47 @@ import EditorContainer from "../../components/CodeMirror/EditorContainer";
 interface PageWithEditorsProps {}
 const questions = [
   {
-    question: "¿Qué es una variable en Python?",
+    question: "¿Cuál es la habilidad más importante de un programador?",
+    description: "",
     options: [
-      "Un tipo de dato",
-      "Un contenedor de datos",
-      "Un operador",
-      "Una función",
+      "Creatividad.",
+      "Capacidad de razonamiento abstracto.",
+      "Capacidad para resolver problemas.",
+      "Saber construir algoritmos.",
     ],
-    answer: "Un contenedor de datos",
+    answer: "Capacidad para resolver problemas.",
   },
   {
-    question: "¿Cómo se asigna un valor a una variable en Python?",
-    options: ["= valor", ": valor", "variable: valor", "variable = valor"],
-    answer: "variable = valor",
+    question: "¿Cuál de estás NO es una característica de Python?",
+    description: "",
+    options: ["Es un lenguaje compilado.", "Usa tipado dinamico.", "Es multiplataforma.", "Es un lenguaje fuertemente tipado."],
+    answer: "Es un lenguaje compilado.",
   },
   {
-    question: "¿Cuál es el resultado de 10 + 5 * 2?",
-    options: ["30", "20", "40", "25"],
-    answer: "20",
+    question: "Para usar Python siempre se debe descargar un editor de código ",
+    description: "",
+    options: ["Verdadero", "Falso"],
+    answer: "Falso",
   },
   {
-    question: "¿Qué tipo de dato se usa para almacenar textos en Python?",
-    options: ["int", "str", "float", "bool"],
-    answer: "str",
+    question: "Al ejecutar la siguiente línea de código, ¿Qué resultados deberías recibir?:",
+    description: (
+      <div className="console-container">
+        <div className="console-box">
+          <SyntaxHighlighter language="python" style={monokai}>
+            {`print(“Bienvenidos al curso de programación de RavenCode.”)`}
+          </SyntaxHighlighter>
+        </div>
+      </div>
+    ),
+    options: ["Hola,mundo", "¿Cómo te llamas?", "La suma de los números es 28", "Bienvenidos al curso de programación de RavenCode"],
+    answer: "Bienvenidos al curso de programación de RavenCode",
   },
   {
-    question: "¿Cómo se define un número decimal en Python?",
-    options: ["10", "10.0", "10,0", "None"],
-    answer: "10.0",
+    question: "Si necesitas recibir un input por parte del usuario, en el que vas a recibir la cantidad de hermanos que tiene, ¿que línea de código deberías utilizar? :",
+    options: ["numero_hermanos = input(“¿Cuántos hermanos tienes?”)", "numero_hermanos = # int(input(“¿Cuántos hermanos tienes?”))",
+       "numero_hermanos = print(“¿Cuántos hermanos tienes?”)", "numero_hermanos = int(input(“¿Cuántos hermanos tienes?”))"],
+    answer: "numero_hermanos = int(input(“¿Cuántos hermanos tienes?”))",
   },
   {
     question:
@@ -144,8 +153,20 @@ const Assesment1: React.FC<ExamProps> = () => {
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div className="flex flex-wrap gap-2 p-4">
+              <Link
+                className="text-[#8e99cc] text-base font-medium leading-normal"
+                to="/courses"
+              >
+                Fundamentos de Python
+              </Link>
+              <span className="text-[#8e99cc] text-base font-medium leading-normal">/</span>
+              <span className="text-white text-base font-medium leading-normal">
+                Examen Módulo 1
+              </span>
+            </div>
             <h1 className="text-white tracking-light text-[35px] font-bold leading-tight px-4 text-left pb-3 pt-5">
-              Examen de Fundamentos de Python
+              Examen Módulo 1
             </h1>
             <form>
               {questions.map((question, index) => (
