@@ -9,6 +9,8 @@ import NotFound from './pages/NotFound';
 import Layout from './components/Layout';
 import Introduction from './pages/Module1/Introduction';
 import Lesson1 from './pages/Module1/Lesson1';
+import Lesson2 from './pages/Module1/Lesson2';
+import Lesson3 from './pages/Module1/Lesson3';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -42,6 +44,8 @@ function App() {
                     <Route path="/courses" element={<PublicLayout><Courses /></PublicLayout>} />
                     <Route path="/introduction" element={<PublicLayout><Introduction /></PublicLayout>} />
                     <Route path="/lesson1" element={<PublicLayout><Lesson1 /></PublicLayout>} />
+                    <Route path="/lesson2" element={<PublicLayout><Lesson2 /></PublicLayout>} />
+                    <Route path="/lesson3" element={<PublicLayout><Lesson3 /></PublicLayout>} />
 
                     {/* Protected routes with dashboard layout */}
                     <Route path="/dashboard" element={
