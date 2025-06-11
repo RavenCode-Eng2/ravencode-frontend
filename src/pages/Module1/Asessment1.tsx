@@ -75,25 +75,93 @@ const questions = [
       "El programa arroja un error porque no es posible efectuar la operación propuesta entre a y b",
   },
   {
-    question: "¿Qué operador se utiliza para la división en Python?",
-    options: ["/", "//", "%", "^"],
-    answer: "/",
+    question:
+      "¿Cuál de las siguientes es la mejor opción para nombrar una variable que se va a encargar de almacenar el nombre de un profesor de cierto colegio?",
+    options: [
+      "profesor_del_colegio ",
+      "prof_n",
+      "profesor_nombre",
+      "Nombre_Del_Profesor",
+    ],
+    answer: "profesor_nombre",
   },
   {
-    question: "¿Cómo se convierte una cadena a un entero en Python?",
-    options: ["int()", "str()", "float()", "bool()"],
-    answer: "int()",
+    question: "Imagina que tienes el siguiente programa:",
+    options: [
+      "1.81",
+      "1",
+      "2",
+      "El programa muestra un error porque no podemos usar int() en un valor de tipo float",
+    ],
+    answer:
+      "El programa muestra un error porque no podemos usar int() en un valor de tipo float",
   },
+
+  {
+    question: "Actividad especial para las preguntas 9 y 10",
+    description: (
+      <>
+        <h2 className="text-white text-xl font-bold">Instrucciones:</h2>
+        <ul className="text-white list-disc pl-6">
+          <li>Pide al estudiante su nombre utilizando la función input().</li>
+          <li>
+            Define las notas de los exámenes de matemáticas como valores de tipo
+            float:
+          </li>
+          <ul className="text-white list-inside">
+            <li>Examen 1: 4.7</li>
+            <li>Examen 2: 1.8</li>
+            <li>Examen 3: 2.7</li>
+            <li>Examen 4: 3.5</li>
+          </ul>
+          <li>
+            Calcula el promedio de las 4 notas y guárdalo en una variable
+            llamada <code>promedio</code>.
+          </li>
+          <li>
+            Crea una variable llamada <code>estudiante_aprobado</code> y asigna
+            un valor <code>True</code> si el promedio es mayor o igual a 3.0. Si
+            el promedio es menor a 3.0, asigna <code>False</code>.
+          </li>
+          <li>Imprime el nombre del estudiante y su promedio.</li>
+          <li>Imprime si el estudiante aprobó o no la asignatura.</li>
+        </ul>
+        <h2 className="text-white text-xl font-bold">
+          <br />
+          Ejemplo de salida esperada:
+        </h2>
+        <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
+          <div className="console-container">
+            ¿Nombre del estudiante? Juan El estudiante Juan tiene un promedio de
+            4.4 en la asignatura de matemáticas ¿El estudiante aprobó la
+            asignatura?: True
+          </div>
+        </p>
+        <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
+          Recuerda, los valores dados en la salida son sacados de un caso de
+          ejemplo, pero tú debes usar las notas que te hemos dado para realizar
+          el ejercicio.
+        </p>
+
+        <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
+          ¿Cuál es el promedio obtenido por el estudiante?
+        </p>
+      </>
+    ),
+    options: ["2.99", "4.12", "3.175", "2.68"],
+    answer: "3.175",
+  },
+
   {
     question:
-      "¿Cuál es el valor de la variable después de la operación x = '10' + 5?",
-    options: ["'105'", "15", "'15'", "Error"],
-    answer: "Error",
-  },
-  {
-    question: "¿Cuál de los siguientes es un tipo de dato booleano en Python?",
-    options: ["True", "1", "None", "All"],
-    answer: "True",
+      "¿Cuál es la forma correcta para asignar el valor a la variable estudiante_aprovado?",
+    options: [
+      "estudiante_aprovado = promedio >= 3.0",
+      "estudiante_aprovado = promedio == 3.0",
+      " estudiante_aprovado = promedio < 3.0",
+      "estudiante_aprovado = promedio  <= 3.0",
+    ],
+    answer: "estudiante_aprovado = promedio >= 3.0",
   },
 ];
 
