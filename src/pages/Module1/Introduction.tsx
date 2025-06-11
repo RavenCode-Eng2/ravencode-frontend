@@ -2,8 +2,17 @@ import React from "react";
 import { theme } from "../../theme";
 import Button from "../../components/Button"; 
 import objetivos_image from "../../assets/images/objetivos.png";
+import { useNavigate } from 'react-router-dom';
+
 
 const Introduction = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/lesson1'); 
+  };
+
+
   return (
     <div
       className="relative flex min-h-screen flex-col"
@@ -75,6 +84,7 @@ const Introduction = () => {
                   size="md"
                   variant="primary"
                   className="w-full px-6 py-3 text-base font-bold leading-normal"
+                  onClick={handleButtonClick}
                 >
                   Inicia tu aprendizaje
                 </Button>

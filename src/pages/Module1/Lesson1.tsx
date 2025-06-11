@@ -3,30 +3,28 @@ import React, { useState } from 'react';
 import { theme } from "../../theme";
 import Button from "../../components/Button"; // Asegúrate de tener el componente Button
 import program from "../../assets/images/programacion.png";
-import EditorContainer from "../../components/CodeMirror/EditorContainer";
 
-interface PageWithEditorsProps {}
+import { useNavigate } from 'react-router-dom';
+import '../../App.css'; 
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';  // Importa el resaltado de sintaxis
+import { monokai} from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 
-const Lesson1: React.FC<PageWithEditorsProps> = () => {
-  // Estado para los códigos en los editores
-  const [currentCode1, setCurrentCode1] = useState<string>(`print("Hello, First Editor!")
-print("valentina hermosa")
-`);
-  const [currentCode2, setCurrentCode2] = useState<string>('print("Hello, Second Editor!")');
-  
-  // Estado para el lenguaje y tema
-  const [currentLanguage, setCurrentLanguage] = useState<string>('python');
-  const [currentTheme, setCurrentTheme] = useState<{ value: string, label: string }>({ value: 'githubDark', label: 'GitHub Dark' });
+const Lesson1 = () => {
+   const navigate = useNavigate();
 
-  // Tamaños para los editores y consolas
-  const editorSize1 = { width: '950px', height: '100px' };  
-  const consoleSize1 = { width: '950px', height: '150px' };
+   const handleButtonClick = () => {
+        navigate('/introduction'); 
+    };
 
-  const editorSize2 = { width: '100px', height: '40px' };  
-  const consoleSize2 = { width: '100px', height: '15px' };
+   const handleButtonClick1 = () => {
+        navigate('/lesson2')
+    };
 
-  return (
+
+
+    return (
+
     <div
       className="relative flex min-h-screen flex-col"
       style={{
@@ -48,16 +46,17 @@ print("valentina hermosa")
                   La programación hace referencia a la actividad de escribir un conjunto de instrucciones (un programa) para que el computador las pueda ejecutar. Por ejemplo, el siguiente es un ejemplo del que suele ser el primer programa que la mayoría de los programadores escribe.
                 </h2>
               </div>
-              <EditorContainer
-                currentCode={currentCode1}
-                setCurrentCode={setCurrentCode1}
-                currentLanguage={currentLanguage}
-                setCurrentLanguage={setCurrentLanguage}
-                currentTheme={currentTheme}
-                setCurrentTheme={setCurrentTheme}
-                editorSize={editorSize1}  
-                consoleSize={consoleSize1}  
-              />
+
+              <div className="console-container">
+                <div className="console-box">
+                    <SyntaxHighlighter language="python" style={monokai}>
+{`print("¡Hola, mundo!")
+`}
+                    </SyntaxHighlighter>
+                </div>
+              </div>
+              
+
             <div
               className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-center justify-center p-4"
               style={{
@@ -202,24 +201,26 @@ print("valentina hermosa")
               </div>
             </div>
 
-        <div className="mt-8 flex justify-between">
-            <div className="mt-8 text-left">
+        <div className="mt-2 flex justify-between">
+            <div className="mt-2 text-left">
                 <Button
                   size="md"
                   variant="primary"
                   className=" px-6 py-3 text-base font-bold leading-normal"
+                  onClick={handleButtonClick}
                 >
-                  Siguiente
+                  Anterior
                 </Button>
             </div>
 
-            <div className="mt-8 text-right">
+            <div className="mt-2 text-right">
                 <Button
                   size="md"
                   variant="primary"
                   className=" px-6 py-3 text-base font-bold leading-normal"
+                  onClick={handleButtonClick1}
                 >
-                  Anterior
+                  Siguiente
                 </Button>
             </div>
         </div>
