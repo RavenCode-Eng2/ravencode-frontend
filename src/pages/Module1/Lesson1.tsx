@@ -4,7 +4,7 @@ import { theme } from "../../theme";
 import Button from "../../components/Button"; // Asegúrate de tener el componente Button
 import program from "../../assets/images/programacion.png";
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../App.css'; 
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';  // Importa el resaltado de sintaxis
 import { monokai} from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -35,10 +35,24 @@ const Lesson1 = () => {
       <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div className="flex flex-wrap gap-2 p-4">
+              <Link
+                className="text-[#8e99cc] text-base font-medium leading-normal"
+                to= "/courses"
+              >
+                Fundamentos de Python
+              </Link>
+              <span className="text-[#8e99cc] text-base font-medium leading-normal">
+                /
+              </span>
+              <span className="text-white text-base font-medium leading-normal">
+                ¿Qué es programar? ¿Qué es Python?
+              </span>
+            </div>
             <div className="flex flex-col gap-8 text-center">
-                <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em]">
-                  Lección 1
-                </h1>
+                <h1 className="text-white tracking-light text-[35px] font-bold leading-tight text-left pb-3 pt-5">
+              Lección 1: ¿Qué es programar? ¿Qué es Python?
+               </h1>
                 <h3 className="text-white text-2xl font-black leading-tight tracking-[-0.033em] text-left">
                     ¿Qué es programar?
                 </h3>
