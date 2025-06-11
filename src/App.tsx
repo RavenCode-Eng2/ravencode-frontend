@@ -15,6 +15,9 @@ import Lesson3 from './pages/Module1/Lesson3';
 
 import Lesson4 from './pages/Module1/Lesson4';
 import Lesson5 from "./pages/Module1/Lesson5";
+import Asessment1 from "./pages/Module1/Asessment1";
+
+
 
 
 import { AuthProvider } from './context/AuthContext';
@@ -57,6 +60,7 @@ function App() {
 
                     <Route path="/lesson4" element={<PublicLayout><Lesson4 /></PublicLayout>} />
                     <Route path="/lesson5" element={<PublicLayout><Lesson5 /></PublicLayout>} />
+                    <Route path="/Assesment1" element={<PublicLayout><Asessment1 /></PublicLayout>} />
 
 
                     {/* Protected routes with dashboard layout */}

@@ -8,11 +8,18 @@ import '../../App.css';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';  // Importa el resaltado de sintaxis
 import { monokai} from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import EditorContainer from "../../components/CodeMirror/EditorContainer";
+import { useEffect } from "react";
 
 interface PageWithEditorsProps {}
 
 
 const Lesson3: React.FC<PageWithEditorsProps> = () => {
+
+  useEffect(() => {
+      // Al montar el componente, llevar el scroll a la parte superior
+      window.scrollTo(0, 0);
+    }, []); // Este efecto solo se ejecutará una vez al montar el componente
+  
   // Estado para los códigos en los editores
     const [currentCode1, setCurrentCode1] =
       useState<string>(`
