@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter"; 
 import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import EditorContainer from "../../components/CodeMirror/EditorContainer";
+import { useEffect } from "react";
 
 const questions = [
   {
@@ -210,6 +211,13 @@ interface PageWithEditorsProps {}
 
 
 const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
+
+
+    useEffect(() => {
+        // Al montar el componente, llevar el scroll a la parte superior
+        window.scrollTo(0, 0);
+      }, []); // Este efecto solo se ejecutará una vez al montar el componente
+    
   const [answers, setAnswers] = useState<string[]>(new Array(10).fill(""));
   const [score, setScore] = useState<number | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
