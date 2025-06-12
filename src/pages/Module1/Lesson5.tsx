@@ -51,7 +51,7 @@ const Lesson5: React.FC<PageWithEditorsProps> = () => {
       };
   
      const handleButtonClick1 = () => {
-          navigate('/lesson5')
+          navigate('/Assesment1')
       };
   
   return (
