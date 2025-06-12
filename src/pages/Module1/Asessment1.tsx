@@ -21,7 +21,12 @@ const questions = [
   {
     question: "¿Cuál de estás NO es una característica de Python?",
     description: "",
-    options: ["Es un lenguaje compilado.", "Usa tipado dinamico.", "Es multiplataforma.", "Es un lenguaje fuertemente tipado."],
+    options: [
+      "Es un lenguaje compilado.",
+      "Usa tipado dinamico.",
+      "Es multiplataforma.",
+      "Es un lenguaje fuertemente tipado.",
+    ],
     answer: "Es un lenguaje compilado.",
   },
   {
@@ -31,7 +36,8 @@ const questions = [
     answer: "Falso",
   },
   {
-    question: "Al ejecutar la siguiente línea de código, ¿Qué resultados deberías recibir?:",
+    question:
+      "Al ejecutar la siguiente línea de código, ¿Qué resultados deberías recibir?:",
     description: (
       <div className="console-container">
         <div className="console-box">
@@ -41,31 +47,37 @@ const questions = [
         </div>
       </div>
     ),
-    options: ["Hola,mundo", "¿Cómo te llamas?", "La suma de los números es 28", "Bienvenidos al curso de programación de RavenCode."],
+    options: [
+      "Hola,mundo",
+      "¿Cómo te llamas?",
+      "La suma de los números es 28",
+      "Bienvenidos al curso de programación de RavenCode.",
+    ],
     answer: "Bienvenidos al curso de programación de RavenCode.",
   },
   {
-    question: "Si necesitas recibir un input por parte del usuario, ¿que línea de código deberías utilizar? :",
-    options: ["numero_hermanos = input(“¿Cuántos hermanos tienes?”)", "numero_hermanos = # int(input(“¿Cuántos hermanos tienes?”))",
-       "numero_hermanos = print(“¿Cuántos hermanos tienes?”)", "numero_hermanos = int(input(“¿Cuántos hermanos tienes?”))"],
+    question:
+      "Si necesitas recibir un input por parte del usuario, ¿que línea de código deberías utilizar? :",
+    options: [
+      "numero_hermanos = input(“¿Cuántos hermanos tienes?”)",
+      "numero_hermanos = # int(input(“¿Cuántos hermanos tienes?”))",
+      "numero_hermanos = print(“¿Cuántos hermanos tienes?”)",
+      "numero_hermanos = int(input(“¿Cuántos hermanos tienes?”))",
+    ],
     answer: "numero_hermanos = int(input(“¿Cuántos hermanos tienes?”))",
   },
   {
     question:
-      "Imagina que tienes el siguiente programa. ¿Cuál es la salida del programa al ejecutarlo",
+      "Imagina que tienes el siguiente programa. ¿Cuál es la salida del programa al ejecutarlo?",
     description: (
       <div className="console-container">
         <div className="console-box">
           <SyntaxHighlighter language="python" style={monokai}>
-            {`a = 5 
- b = 2
- suma = a + b # 7 
- resta = a - b # 3 
- multiplicacion = a * b # 10 
- division = a / b # 2.5 
- entera = a // b # 2 
- modulo = a % b # 1 
- exponente = a ** b # 25`}
+            {`a =  10
+ b = “5”
+ c = a * b
+ print(“El resultado es:”, c )
+`}
           </SyntaxHighlighter>
         </div>
       </div>
@@ -92,6 +104,28 @@ const questions = [
   },
   {
     question: "Imagina que tienes el siguiente programa:",
+    description: (
+      <>
+        <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
+          <div className="console-container">
+            <div className="console-box">
+              <SyntaxHighlighter language="python" style={monokai}>
+                {`a =  float(input("Digita tu altura"))
+b = int(a)
+print("Tu altura es:", b)`}
+              </SyntaxHighlighter>
+            </div>
+          </div>
+        </p>
+        <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
+          Supongamos que el usuario digita en el input el valor{" "}
+          <strong>1.81</strong>.
+        </p>
+        <h2 className="text-white text-xl font-bold">
+          ¿Cuál es la salida del programa al ejecutarlo?
+        </h2>
+      </>
+    ),
     options: [
       "1.81",
       "1",
@@ -137,9 +171,10 @@ const questions = [
         </h2>
         <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
           <div className="console-container">
-            ¿Nombre del estudiante? Juan El estudiante Juan tiene un promedio de
-            4.4 en la asignatura de matemáticas ¿El estudiante aprobó la
-            asignatura?: True
+            ¿Nombre del estudiante? Juan <br />
+            El estudiante Juan tiene un promedio de 4.4 en la asignatura de
+            matemáticas <br />
+            ¿El estudiante aprobó la asignatura?: True
           </div>
         </p>
         <p className="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
