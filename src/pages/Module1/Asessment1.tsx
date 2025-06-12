@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { theme } from "../../theme";
-import Button from "../../components/Button"; // Asegúrate de que tienes el componente Button
+import Button from "../../components/Button"; 
 import { Link, useNavigate } from 'react-router-dom'; 
-import { useEffect } from "react";
-
-
-import { Light as SyntaxHighlighter } from "react-syntax-highlighter"; // Importa el resaltado de sintaxis
+import { Light as SyntaxHighlighter } from "react-syntax-highlighter"; 
 import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import EditorContainer from "../../components/CodeMirror/EditorContainer";
 
 interface PageWithEditorsProps {}
 const questions = [
@@ -45,11 +41,11 @@ const questions = [
         </div>
       </div>
     ),
-    options: ["Hola,mundo", "¿Cómo te llamas?", "La suma de los números es 28", "Bienvenidos al curso de programación de RavenCode"],
-    answer: "Bienvenidos al curso de programación de RavenCode",
+    options: ["Hola,mundo", "¿Cómo te llamas?", "La suma de los números es 28", "Bienvenidos al curso de programación de RavenCode."],
+    answer: "Bienvenidos al curso de programación de RavenCode.",
   },
   {
-    question: "Si necesitas recibir un input por parte del usuario, en el que vas a recibir la cantidad de hermanos que tiene, ¿que línea de código deberías utilizar? :",
+    question: "Si necesitas recibir un input por parte del usuario, ¿que línea de código deberías utilizar? :",
     options: ["numero_hermanos = input(“¿Cuántos hermanos tienes?”)", "numero_hermanos = # int(input(“¿Cuántos hermanos tienes?”))",
        "numero_hermanos = print(“¿Cuántos hermanos tienes?”)", "numero_hermanos = int(input(“¿Cuántos hermanos tienes?”))"],
     answer: "numero_hermanos = int(input(“¿Cuántos hermanos tienes?”))",
@@ -181,6 +177,7 @@ const Assesment1: React.FC<ExamProps> = () => {
   const [score, setScore] = useState<number | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalMessage, setModalMessage] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const updatedAnswers = [...answers];
@@ -207,6 +204,17 @@ const Assesment1: React.FC<ExamProps> = () => {
     }
 
     setShowModal(true); // Show the modal after submitting
+  };
+
+  const handleModalClose = () => {
+    if (score! <= 8) {
+      // Clear answers if score is between 3 and 8
+      setAnswers(new Array(10).fill(""));
+    } else if (score! >= 8) {
+      // Navigate to the next module if score is more than 8
+      navigate("/courses"); // Change this path to the appropriate next module page
+    }
+    setShowModal(false);
   };
 
   return (
@@ -277,13 +285,7 @@ const Assesment1: React.FC<ExamProps> = () => {
                 Subir
               </Button>
             </div>
-            {score !== null && (
-              <div className="mt-8 text-center">
-                <h3 className="text-white text-lg font-bold tracking-[-0.015em]">
-                  Tu calificación es: {score} de {questions.length}
-                </h3>
-              </div>
-            )}
+            
           </div>
         </div>
       </div>
@@ -295,14 +297,21 @@ const Assesment1: React.FC<ExamProps> = () => {
             <h2 className="text-2xl font-bold text-black mb-4">
               Resultado del Examen
             </h2>
+            {score !== null && (
+              <div className="mt-8 text-center">
+                <h3 className="text-black text-lg font-bold tracking-[-0.015em]">
+                  Tu calificación es: {score} de {questions.length}
+                </h3>
+              </div>
+            )}
             <p className="text-lg text-black mb-4">{modalMessage}</p>
             <Button
               size="md"
               variant="primary"
               className="px-6 py-3 text-base font-bold leading-normal"
-              onClick={() => setShowModal(false)}
+              onClick={handleModalClose}
             >
-              Cerrar
+              {score! >= 8 ? "Vamos al siguiente módulo" : "Cerrar"}
             </Button>
           </div>
         </div>
