@@ -254,6 +254,18 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
 
   const handleSubmit = () => {
     let correctAnswers = 0;
+
+    // Estructurar las respuestas antes de enviarlas
+    const studentAnswers = questions.map((question, index) => ({
+      question_id: index + 1,  // El ID de la pregunta es el índice + 1
+      response: answers[index], // Respuesta seleccionada
+    }));
+
+    // Obtener el token del estudiante desde las cookies
+    const studentToken = getStudentTokenFromCookies();
+
+    //Aqui se haria el post
+
     questions.forEach((question, index) => {
       if (answers[index] === question.answer) {
         correctAnswers++;
@@ -282,6 +294,12 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
       navigate("/courses"); // Change this path to the appropriate next module page
     }
     setShowModal(false);
+  };
+
+  const getStudentTokenFromCookies = () => {
+    const cookies = document.cookie.split(';');
+    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('student_token='));
+    return tokenCookie ? tokenCookie.split('=')[1] : ''; // Retorna el token
   };
 
   return (
