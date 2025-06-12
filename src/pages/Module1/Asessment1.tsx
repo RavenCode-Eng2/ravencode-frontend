@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { theme } from "../../theme";
 import Button from "../../components/Button"; 
 import { Link, useNavigate } from 'react-router-dom'; 
@@ -209,6 +210,56 @@ print("Tu altura es:", b)`}
 interface ExamProps {}
 interface PageWithEditorsProps {}
 
+interface SubmitExamParams {
+  studentToken: string;
+  module: string;
+  grade: number;
+}
+
+interface ResponsePayload {
+  question_id: number;
+  answer: string;
+}
+
+interface SubmitResponsesParams {
+  studentToken: string;
+  responses: ResponsePayload[];
+}
+
+const submitExam = async ({ studentToken, module, grade }: SubmitExamParams) => {
+  try {
+    const response = await axios.post("http://localhost:8002/grades/grades/", {
+      student_token: studentToken,
+      module: module,
+      grade: grade,
+      date_assigned: new Date().toISOString(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error enviando examen:", error);
+    throw error;
+  }
+};
+
+
+const submitResponses = async ({ studentToken, responses }: SubmitResponsesParams) => {
+  try {
+    const payload = {
+      student_token: studentToken,
+      responses: responses.map(r => ({
+        question_id: r.question_id,  
+        answer: r.answer             
+      }))
+    };
+    const res = await axios.post("http://localhost:8002/responses/responses/", payload);
+    return res.data;
+  } catch (err) {
+    console.error("Error enviando respuestas:", err);
+    throw err;
+  }
+};
+
+
 
 const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
 
@@ -246,25 +297,56 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
     const editorSize2 = { width: "100px", height: "40px" };
     const consoleSize2 = { width: "100px", height: "15px" };
 
-  const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const updatedAnswers = [...answers];
     updatedAnswers[index] = e.target.value;
     setAnswers(updatedAnswers);
   };
 
-  const handleSubmit = () => {
-    let correctAnswers = 0;
+    // Función para obtener el token del estudiante desde las cookies
+    const getStudentTokenFromCookies = () => {
+    const cookies = document.cookie.split(';');
+    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('student_token='));
+    return tokenCookie ? tokenCookie.split('=')[1] : ''; // Retorna el token
+  };
 
-    // Estructurar las respuestas antes de enviarlas
-    const studentAnswers = questions.map((question, index) => ({
-      question_id: index + 1,  // El ID de la pregunta es el índice + 1
-      response: answers[index], // Respuesta seleccionada
+    const handleSubmit = async () => {
+      let correctAnswers = 0;
+
+  
+
+      const studentGrade = questions.map((question, index) => ({
+      module: 'Assessment1',  // Nombre fijo para el módulo
+      grade: answers[index] === question.answer ? 1 : 0,  // Calificación 1 si la respuesta es correcta, sino 0
+      date_assigned: new Date().toISOString(),
     }));
+
+    // Calculamos las respuestas correctas y la calificación (multiplicada por 2)
+    const grade = studentGrade.reduce((acc, answer) => acc + answer.grade, 0) * 5;
 
     // Obtener el token del estudiante desde las cookies
     const studentToken = getStudentTokenFromCookies();
 
-    //Aqui se haria el post
+    const studentResponses = questions.map((q, idx) => ({
+    question_id: idx + 1,       // debe ser number
+    answer: answers[idx]        // property `answer` (no `response`)
+  }));
+
+    try {
+      // Enviar la calificación final a través del API
+      const result = await submitExam({ studentToken, module: "Assessment1", grade });
+      console.log("Examen enviado:", result);
+
+      
+      const result2 = await submitResponses({studentToken, responses:studentResponses});
+      console.log("Examen enviado:", result2);
+
+
+    } catch (error) {
+      console.error("Error enviando el examen:", error);
+    }
+
+    
 
     questions.forEach((question, index) => {
       if (answers[index] === question.answer) {
@@ -296,11 +378,6 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
     setShowModal(false);
   };
 
-  const getStudentTokenFromCookies = () => {
-    const cookies = document.cookie.split(';');
-    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('student_token='));
-    return tokenCookie ? tokenCookie.split('=')[1] : ''; // Retorna el token
-  };
 
   return (
     <div
