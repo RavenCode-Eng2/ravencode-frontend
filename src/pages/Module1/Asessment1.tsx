@@ -4,8 +4,8 @@ import Button from "../../components/Button";
 import { Link, useNavigate } from 'react-router-dom'; 
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter"; 
 import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import EditorContainer from "../../components/CodeMirror/EditorContainer";
 
-interface PageWithEditorsProps {}
 const questions = [
   {
     question: "¿Cuál es la habilidad más importante de un programador?",
@@ -206,13 +206,37 @@ print("Tu altura es:", b)`}
 ];
 
 interface ExamProps {}
+interface PageWithEditorsProps {}
 
-const Assesment1: React.FC<ExamProps> = () => {
+
+const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
   const [answers, setAnswers] = useState<string[]>(new Array(10).fill(""));
   const [score, setScore] = useState<number | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalMessage, setModalMessage] = useState<string>("");
   const navigate = useNavigate();
+
+
+  // Estado para los códigos en los editores
+    const [currentCode1, setCurrentCode1] = useState<string>(`
+      `);
+    const [currentCode2, setCurrentCode2] = useState<string>(
+      'print("Hello, Second Editor!")'
+    );
+  
+    // Estado para el lenguaje y tema
+    const [currentLanguage, setCurrentLanguage] = useState<string>("python");
+    const [currentTheme, setCurrentTheme] = useState<{
+      value: string;
+      label: string;
+    }>({ value: "githubDark", label: "GitHub Dark" });
+  
+    // Tamaños para los editores y consolas
+    const editorSize1 = { width: "950px", height: "100px" };
+    const consoleSize1 = { width: "950px", height: "150px" };
+  
+    const editorSize2 = { width: "100px", height: "40px" };
+    const consoleSize2 = { width: "100px", height: "15px" };
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const updatedAnswers = [...answers];
@@ -308,7 +332,23 @@ const Assesment1: React.FC<ExamProps> = () => {
                   </div>
                 </div>
               ))}
+              
             </form>
+            <div className="flex flex-col gap-4 px-4 pt-5">
+              <EditorContainer
+                currentCode={currentCode1}
+                setCurrentCode={setCurrentCode1}
+                currentLanguage={currentLanguage}
+                setCurrentLanguage={setCurrentLanguage}
+                currentTheme={currentTheme}
+                setCurrentTheme={setCurrentTheme}
+                editorSize={editorSize1}
+                consoleSize={consoleSize1}
+              />
+            </div>
+          
+
+            
 
             <div className="mt-8 flex justify-between">
               <Button
