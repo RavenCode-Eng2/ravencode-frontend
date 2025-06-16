@@ -7,6 +7,9 @@ import Courses from './pages/Courses';
 import MyCourses from './pages/MyCourses';
 import NotFound from './pages/NotFound';
 import Layout from './components/Layout';
+
+import ForgotPassword from './pages/ForgotPassword';
+
 import Introduction from './pages/Module1/Introduction';
 import Lesson1 from './pages/Module1/Lesson1';
 
@@ -16,9 +19,6 @@ import Lesson3 from './pages/Module1/Lesson3';
 import Lesson4 from './pages/Module1/Lesson4';
 import Lesson5 from "./pages/Module1/Lesson5";
 import Asessment1 from "./pages/Module1/Asessment1";
-
-
-
 
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -51,6 +51,8 @@ function App() {
                     <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
                     <Route path="/register" element={<PublicLayout><Register /></PublicLayout>} />
                     <Route path="/courses" element={<PublicLayout><Courses /></PublicLayout>} />
+                    <Route path="/forgot-password" element={<PublicLayout><ForgotPassword /></PublicLayout>} />
+                  
                     <Route path="/introduction" element={<PublicLayout><Introduction /></PublicLayout>} />
                     <Route path="/lesson1" element={<PublicLayout><Lesson1 /></PublicLayout>} />
 
@@ -61,7 +63,6 @@ function App() {
                     <Route path="/lesson4" element={<PublicLayout><Lesson4 /></PublicLayout>} />
                     <Route path="/lesson5" element={<PublicLayout><Lesson5 /></PublicLayout>} />
                     <Route path="/Assesment1" element={<PublicLayout><Asessment1 /></PublicLayout>} />
-
 
                     {/* Protected routes with dashboard layout */}
                     <Route path="/dashboard" element={
