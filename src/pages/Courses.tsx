@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import { theme } from "../theme";
 import python_logo from "../assets/images/python_logo.png";
 import flujo_logo from "../assets/images/flujo_logo.png";
+import { Link } from 'react-router-dom'; // Asegúrate de importar Link
 
 const courseData = [
   {
@@ -11,20 +12,24 @@ const courseData = [
       "En este primer módulo aprenderás los fundamentos esenciales para comenzar a escribir tus propios programas.",
     image: python_logo,
     modules: [
-      { title: "Lección 1", description: "¿Qué es programar? ¿Qué es python?" },
+      { title: "Introducción", description: "Bienvenida", route: "/introduction" },
+      { title: "Lección 1", description: "¿Qué es programar? ¿Qué es python?", route: "/lesson1" },
       {
         title: "Lección 2",
         description: "Cómo descargar y usar python en tu computador",
+        route: "/lesson2"
       },
       {
         title: "Lección 3",
         description: "Entrada del usuario, salidas del programa y comentarios",
+        route: "/lesson3"
       },
       {
         title: "Lección 4",
         description: "Variables y tipos de datos (int, float, str, bool)",
+        route: "/lesson4"
       },
-      { title: "Lección 5", description: "Operaciones y expresiones" },
+      { title: "Lección 5", description: "Operaciones y expresiones", route: "/lesson5" },
     ],
   },
   {
@@ -152,9 +157,11 @@ const CourseCard: React.FC<{
                   <p className="text-white text-md font-bold">{module.title}</p>
                   <p className="text-[#9caaba] text-sm">{module.description}</p>
                 </div>
-                <Button size="sm" variant="primary" className="mt-2 mr-8 w-fit">
+                <Link to={module.route || '#'} className="mt-2 mr-8 w-fit">
+                <Button size="sm" variant="primary">
                   <span className="truncate">Ver lección</span>
                 </Button>
+                </Link>
               </li>
             ))}
           </ul>
