@@ -26,27 +26,27 @@ const Header: React.FC = () => {
                         to="/"
                         className={`text-sm font-medium leading-normal transition-colors ${isActive('/') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
                     >
-                        Home
+                        Inicio
                     </Link>
                     <Link
                         to="/courses"
                         className={`text-sm font-medium leading-normal transition-colors ${isActive('/courses') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
                     >
-                        Courses
+                        Cursos
                     </Link>
                     {isAuthenticated && (
                         <Link
                             to="/my-courses"
                             className={`text-sm font-medium leading-normal transition-colors ${isActive('/my-courses') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
                         >
-                            My Courses
+                            Mis Cursos
                         </Link>
                     )}
                     <Link
                         to="/help"
                         className={`text-sm font-medium leading-normal transition-colors ${isActive('/help') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
                     >
-                        Help
+                        Ayuda
                     </Link>
                 </div>
                 {isAuthenticated ? (
@@ -65,7 +65,7 @@ const Header: React.FC = () => {
                         to="/login"
                         className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#283039] text-white text-sm font-bold leading-normal hover:bg-[#3b4754] transition-colors"
                     >
-                        Log in
+                        Iniciar sesión
                     </Link>
                 )}
             </div>

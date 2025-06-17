@@ -1,15 +1,17 @@
 import React from 'react';
 import { theme } from '../theme';
-import ModuleCard from '../components/ModuleCard';
 import ProgressCard from '../components/ProgressCard';
 import Button from '../components/Button';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard: React.FC = () => {
+    const { user } = useAuth();
+
     return (
         <div className={`px-40 flex flex-1 justify-center py-5 bg-[${theme.colors.background.main}]`}>
             <div className={`layout-content-container flex flex-col ${theme.spacing.container.max} flex-1`}>
                 <h2 className={`${theme.typography.heading.h1} text-${theme.colors.text.primary} px-4 text-left pb-3 pt-5`}>
-                    ¡Bienvenida de nuevo, Sarah!
+                    ¡Bienvenido de nuevo, {user?.Nombre || 'Usuario'}!
                 </h2>
 
                 {/* Sección Continuar Tu Aventura */}

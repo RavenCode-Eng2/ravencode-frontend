@@ -9,7 +9,7 @@ interface SidebarItem {
 
 const dashboardItems: SidebarItem[] = [
     {
-        title: 'Overview',
+        title: 'Vista General',
         path: '/dashboard',
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
@@ -18,7 +18,7 @@ const dashboardItems: SidebarItem[] = [
         )
     },
     {
-        title: 'My Progress',
+        title: 'Mi Progreso',
         path: '/my-courses',
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
@@ -27,11 +27,20 @@ const dashboardItems: SidebarItem[] = [
         )
     },
     {
-        title: 'Achievements',
+        title: 'Logros',
         path: '/achievements',
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
                 <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm37.66-61.66a8,8,0,0,1,0,11.32l-24,24a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L128,164.69l26.34-26.35A8,8,0,0,1,165.66,154.34Zm0-64a8,8,0,0,1,0,11.32L128,139.31,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35A8,8,0,0,1,165.66,90.34Z" />
+            </svg>
+        )
+    },
+    {
+        title: 'Configuración',
+        path: '/settings',
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z" />
             </svg>
         )
     }
