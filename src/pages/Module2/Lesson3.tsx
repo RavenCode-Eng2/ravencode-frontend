@@ -14,12 +14,12 @@ import { python } from '@codemirror/lang-python';
 import axios from 'axios';
 
 
-const Lesson2 = () => {
+const Lesson3 = () => {
   const [code, setCode] = useState(`# ¡Inténtalo!
-# Haz un programa que pida un número positivo. Si se escribe un número negativo, vuelve a preguntar.
+# Escribe un programa que imprima los múltiplos de 3 entre 1 y 30.
 
-# Aquí va tu código con ciclo while
-# Usa while para repetir hasta que se ingrese un número positivo
+# Aquí va tu código con ciclo for y range()
+# Usa for y range() para encontrar los múltiplos de 3
 
 `);
 
@@ -35,11 +35,11 @@ const Lesson2 = () => {
    const navigate = useNavigate();
 
    const handleButtonClick = () => {
-        navigate('/lesson1-module2'); 
+        navigate('/lesson2-module2'); 
     };
 
    const handleButtonClick1 = () => {
-        navigate('/lesson3-module2')
+        navigate('/lesson4-module2')
     };
 
    // Función para ejecutar el código con Judge0
@@ -130,31 +130,30 @@ const Lesson2 = () => {
                 /
               </span>
               <span className="text-white text-base font-medium leading-normal">
-                Ciclo while
+                Ciclo for y range()
               </span>
             </div>
             <div className="flex flex-col gap-8 text-center">
                 <h1 className="text-white tracking-light text-[35px] font-bold leading-tight text-left pb-3 pt-5">
-              Lección 2: Ciclo while
+              Lección 3: Ciclo for y range()
                </h1>
                 <h3 className="text-white text-2xl font-black leading-tight tracking-[-0.033em] text-left">
-                    ¿Qué es el ciclo while?
+                    ¿Qué es el ciclo for?
                 </h3>
                 <h2 className="text-white text-lg font-normal leading-normal text-justify">
-                  El ciclo while se usa cuando no sabemos cuántas veces repetiremos algo, pero sí sabemos la condición bajo la cual queremos repetirlo.
+                  El ciclo for se usa cuando sabemos cuántas veces queremos repetir algo. En Python, se combina con range() para contar.
                 </h2>
               </div>
 
               <div className="console-container">
                 <div className="console-box">
                     <SyntaxHighlighter language="python" style={monokai}>
-{`while condicion:
-    # bloque de instrucciones`}
+{`for variable in range(inicio, fin, paso):
+    # bloque`}
                     </SyntaxHighlighter>
                 </div>
               </div>
               
-
 
             <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
               Términos clave
@@ -166,10 +165,10 @@ const Lesson2 = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <h2 className="text-white text-base font-bold leading-tight">
-                    Iteración
+                    range(n)
                   </h2>
                   <p className="text-[#8e99cc] text-sm font-normal leading-normal text-justify">
-                    Una repetición del ciclo.
+                    Cuenta desde 0 hasta n-1.
                   </p>
                 </div>
               </div>
@@ -179,10 +178,10 @@ const Lesson2 = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <h2 className="text-white text-base font-bold leading-tight">
-                    Condición de parada
+                    range(a, b)
                   </h2>
                   <p className="text-[#8e99cc] text-sm font-normal leading-normal text-justify">
-                    Lo que hace que el ciclo termine. Debe volverse False eventualmente.
+                    Cuenta desde a hasta b-1.
                   </p>
                 </div>
               </div>
@@ -192,10 +191,10 @@ const Lesson2 = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <h2 className="text-white text-base font-bold leading-tight">
-                    Ciclo infinito
+                    range(a, b, s)
                   </h2>
                   <p className="text-[#8e99cc] text-sm font-normal leading-normal text-justify">
-                    Cuando la condición nunca deja de cumplirse y el programa no se detiene.
+                    Cuenta desde a hasta b-1 saltando s en cada paso.
                   </p>
                 </div>
               </div>
@@ -207,13 +206,8 @@ const Lesson2 = () => {
             <div className="console-container">
                 <div className="console-box">
                     <SyntaxHighlighter language="python" style={monokai}>
-{`clave = "python123"
-intento = ""
-
-while intento != clave:
-    intento = input("Escribe la contraseña: ")
-
-print("¡Acceso concedido!")`}
+{`for i in range(1, 6):
+    print("Vuelo número", i)`}
                     </SyntaxHighlighter>
                 </div>
               </div>
@@ -227,7 +221,7 @@ print("¡Acceso concedido!")`}
                     Ejercicio práctico
                   </h2>
                   <p className="text-[#8e99cc] text-sm font-normal leading-normal text-justify">
-                    Haz un programa que pida un número positivo. Si se escribe un número negativo, vuelve a preguntar.
+                    Escribe un programa que imprima los múltiplos de 3 entre 1 y 30.
                   </p>
                 </div>
             </div>
@@ -281,7 +275,7 @@ print("¡Acceso concedido!")`}
                     <textarea
                         value={userInput}
                         onChange={(e) => setUserInput(e.target.value)}
-                        placeholder="Ingresa aquí los datos que tu programa necesita (ej: -5, 3)"
+                        placeholder="Para este ejercicio no necesitas entrada, pero puedes usarlo si tu programa la requiere"
                         className="w-full p-3 bg-[#2d2d2d] text-white border border-[#444] rounded-lg font-mono text-sm resize-none"
                         rows={3}
                     />
@@ -340,4 +334,4 @@ print("¡Acceso concedido!")`}
   );
 };
 
-export default Lesson2;
+export default Lesson3;
