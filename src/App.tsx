@@ -19,7 +19,7 @@ import Lesson3 from './pages/Module1/Lesson3';
 
 import Lesson4 from './pages/Module1/Lesson4';
 import Lesson5 from "./pages/Module1/Lesson5";
-import Asessment1 from "./pages/Module1/Asessment1";
+import Assesment1 from "./pages/Module1/Assesment1";
 
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -75,7 +75,7 @@ function App() {
                             <Route path="/lesson3" element={<ProtectedRoute><CoursesLayout><Lesson3 /></CoursesLayout></ProtectedRoute>} />
                             <Route path="/lesson4" element={<ProtectedRoute><CoursesLayout><Lesson4 /></CoursesLayout></ProtectedRoute>} />
                             <Route path="/lesson5" element={<ProtectedRoute><CoursesLayout><Lesson5 /></CoursesLayout></ProtectedRoute>} />
-                            <Route path="/Assessment1" element={<ProtectedRoute><CoursesLayout><Asessment1 /></CoursesLayout></ProtectedRoute>} />
+                            <Route path="/Assesment1" element={<ProtectedRoute><CoursesLayout><Assesment1 /></CoursesLayout></ProtectedRoute>} />
 
                             {/* Catch all route */}
                             <Route path="*" element={<NotFound />} />
