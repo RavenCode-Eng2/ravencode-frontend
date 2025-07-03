@@ -7,6 +7,7 @@ import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import EditorContainer from "../../components/CodeMirror/EditorContainer";
 import { useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const questions = [
   {
@@ -211,7 +212,7 @@ interface ExamProps {}
 interface PageWithEditorsProps {}
 
 interface SubmitExamParams {
-  studentToken: string;
+  email: string;
   module: string;
   grade: number;
 }
@@ -222,14 +223,14 @@ interface ResponsePayload {
 }
 
 interface SubmitResponsesParams {
-  studentToken: string;
+  email: string;
   responses: ResponsePayload[];
 }
 
-const submitExam = async ({ studentToken, module, grade }: SubmitExamParams) => {
+const submitExam = async ({ email: email, module, grade }: SubmitExamParams) => {
   try {
     const response = await axios.post("http://localhost:8002/grades/grades/", {
-      student_token: studentToken,
+      email: email,
       module: module,
       grade: grade,
       date_assigned: new Date().toISOString(),
@@ -242,10 +243,10 @@ const submitExam = async ({ studentToken, module, grade }: SubmitExamParams) => 
 };
 
 
-const submitResponses = async ({ studentToken, responses }: SubmitResponsesParams) => {
+const submitResponses = async ({ email, responses }: SubmitResponsesParams) => {
   try {
     const payload = {
-      student_token: studentToken,
+      email: email,
       responses: responses.map(r => ({
         question_id: r.question_id,  
         answer: r.answer             
@@ -264,11 +265,11 @@ const submitResponses = async ({ studentToken, responses }: SubmitResponsesParam
 const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
 
 
-    useEffect(() => {
-        // Al montar el componente, llevar el scroll a la parte superior
-        window.scrollTo(0, 0);
-      }, []); // Este efecto solo se ejecutará una vez al montar el componente
-    
+  useEffect(() => {
+      // Al montar el componente, llevar el scroll a la parte superior
+      window.scrollTo(0, 0);
+    }, []); // Este efecto solo se ejecutará una vez al montar el componente
+  const { user, isAuthenticated } = useAuth(); 
   const [answers, setAnswers] = useState<string[]>(new Array(10).fill(""));
   const [score, setScore] = useState<number | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -303,20 +304,21 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
     setAnswers(updatedAnswers);
   };
 
-    // Función para obtener el token del estudiante desde las cookies
-    const getStudentTokenFromCookies = () => {
-    const cookies = document.cookie.split(';');
-    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('student_token='));
-    return tokenCookie ? tokenCookie.split('=')[1] : ''; // Retorna el token
-  };
+    
 
     const handleSubmit = async () => {
       let correctAnswers = 0;
 
+      if (!user?.Correo_electronico) {
+      console.error("Usuario no autenticado");
+      navigate("/login"); // Redirigir al login si no está autenticado
+      return;
+    }
+
   
 
       const studentGrade = questions.map((question, index) => ({
-      module: 'Assessment1',  // Nombre fijo para el módulo
+      module: 'Assesment1',  // Nombre fijo para el módulo
       grade: answers[index] === question.answer ? 1 : 0,  // Calificación 1 si la respuesta es correcta, sino 0
       date_assigned: new Date().toISOString(),
     }));
@@ -324,8 +326,7 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
     // Calculamos las respuestas correctas y la calificación (multiplicada por 2)
     const grade = studentGrade.reduce((acc, answer) => acc + answer.grade, 0) * 5;
 
-    // Obtener el token del estudiante desde las cookies
-    const studentToken = getStudentTokenFromCookies();
+    
 
     const studentResponses = questions.map((q, idx) => ({
     question_id: idx + 1,       // debe ser number
@@ -334,11 +335,11 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
 
     try {
       // Enviar la calificación final a través del API
-      const result = await submitExam({ studentToken, module: "Assessment1", grade });
+      const result = await submitExam({ email: user?.Correo_electronico , module: "Assesment1", grade });
       console.log("Examen enviado:", result);
 
       
-      const result2 = await submitResponses({studentToken, responses:studentResponses});
+      const result2 = await submitResponses({email: user?.Correo_electronico, responses:studentResponses});
       console.log("Examen enviado:", result2);
 
 
