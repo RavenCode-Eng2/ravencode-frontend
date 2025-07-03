@@ -38,7 +38,8 @@ const courseData = [
       "Dive into web development with JavaScript. Build interactive websites and learn about front-end frameworks.",
     image: flujo_logo,
     modules: [
-      { title: "Lección 1", description: "Condicionales: if, elif, else" },
+      { title: "Introducción", description: "Condicionales: if, elif, else", route: "/introduction-module2"},
+      { title: "Lección 1", description: "Condicionales: if, elif, else",route: "/lesson1-module2" },
       {
         title: "Lección 2",
         description: "Ciclo while",
