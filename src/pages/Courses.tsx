@@ -43,14 +43,22 @@ const courseData = [
       {
         title: "Lección 2",
         description: "Ciclo while",
+        route: "/lesson2-module2"
       },
       {
         title: "Lección 3",
         description: "Ciclo for y range()",
+        route: "/lesson3-module2"
       },
       {
         title: "Lección 4",
         description: "Combinación de condicionales + bucles + operadores lógicos",
+        route: "/lesson4-module2"
+      },
+      {
+        title: "Examen",
+        description: "Prueba tus conocimientos",
+        route: "/assessment2"
       },
     ],
   },
