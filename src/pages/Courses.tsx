@@ -38,18 +38,27 @@ const courseData = [
       "Dive into web development with JavaScript. Build interactive websites and learn about front-end frameworks.",
     image: flujo_logo,
     modules: [
-      { title: "Lección 1", description: "Condicionales: if, elif, else" },
+      { title: "Introducción", description: "Condicionales: if, elif, else", route: "/introduction-module2"},
+      { title: "Lección 1", description: "Condicionales: if, elif, else",route: "/lesson1-module2" },
       {
         title: "Lección 2",
         description: "Ciclo while",
+        route: "/lesson2-module2"
       },
       {
         title: "Lección 3",
         description: "Ciclo for y range()",
+        route: "/lesson3-module2"
       },
       {
         title: "Lección 4",
         description: "Combinación de condicionales + bucles + operadores lógicos",
+        route: "/lesson4-module2"
+      },
+      {
+        title: "Examen",
+        description: "Prueba tus conocimientos",
+        route: "/assessment2"
       },
     ],
   },
