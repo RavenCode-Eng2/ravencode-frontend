@@ -68,4 +68,19 @@ export const learningService = {
 
     return response.json();
   },
+
+  getGrade: async (email: string, module: string): Promise<ApiResponse<any>> => {
+    const response = await fetch(`${config.learningApiUrl}/grades/${email}/${module}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Error al obtener la calificación');
+    }
+
+    return response.json();
+  },
 }; 

@@ -211,7 +211,7 @@ interface ExamProps {}
 interface PageWithEditorsProps {}
 
 interface SubmitExamParams {
-  studentToken: string;
+  email: string;
   module: string;
   grade: number;
 }
@@ -222,14 +222,14 @@ interface ResponsePayload {
 }
 
 interface SubmitResponsesParams {
-  studentToken: string;
+  email: string;
   responses: ResponsePayload[];
 }
 
-const submitExam = async ({ studentToken, module, grade }: SubmitExamParams) => {
+const submitExam = async ({ email, module, grade }: SubmitExamParams) => {
   try {
     const response = await axios.post("http://localhost:8002/grades/grades/", {
-      student_token: studentToken,
+      email: email,
       module: module,
       grade: grade,
       date_assigned: new Date().toISOString(),
@@ -242,10 +242,10 @@ const submitExam = async ({ studentToken, module, grade }: SubmitExamParams) => 
 };
 
 
-const submitResponses = async ({ studentToken, responses }: SubmitResponsesParams) => {
+const submitResponses = async ({ email, responses }: SubmitResponsesParams) => {
   try {
     const payload = {
-      student_token: studentToken,
+      email: email,
       responses: responses.map(r => ({
         question_id: r.question_id,  
         answer: r.answer             
@@ -306,7 +306,7 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
     // Función para obtener el token del estudiante desde las cookies
     const getStudentTokenFromCookies = () => {
     const cookies = document.cookie.split(';');
-    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('student_token='));
+    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('email='));
     return tokenCookie ? tokenCookie.split('=')[1] : ''; // Retorna el token
   };
 
@@ -334,11 +334,11 @@ const Assesment1: React.FC<ExamProps & PageWithEditorsProps> = () => {
 
     try {
       // Enviar la calificación final a través del API
-      const result = await submitExam({ studentToken, module: "Assessment1", grade });
+      const result = await submitExam({ email: studentToken, module: "Assessment1", grade });
       console.log("Examen enviado:", result);
 
       
-      const result2 = await submitResponses({studentToken, responses:studentResponses});
+      const result2 = await submitResponses({email: studentToken, responses:studentResponses});
       console.log("Examen enviado:", result2);
 
 

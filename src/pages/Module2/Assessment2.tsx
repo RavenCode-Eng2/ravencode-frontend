@@ -162,7 +162,7 @@ interface SubmitResponsesParams {
 
 const submitExam = async ({ email, module, grade }: SubmitExamParams) => {
   try {
-    const response = await axios.post("http://localhost:8002/grades/grades/", {
+    const response = await axios.post("http://localhost:8002/grades/", {
       email: email,
       module: module,
       grade: grade,
