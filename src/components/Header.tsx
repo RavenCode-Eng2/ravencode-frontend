@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     return (
         <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#283039] px-10 py-3">
             <div className="flex items-center gap-4 text-white">
-                <Link to="/" className="flex items-center gap-4">
+                <Link to={isAuthenticated ? "/dashboard" : "/"} className="flex items-center gap-4">
                     <div className="size-4">
                         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" />
@@ -23,8 +23,8 @@ const Header: React.FC = () => {
             <div className="flex flex-1 justify-end gap-8">
                 <div className="flex items-center gap-9">
                     <Link
-                        to="/"
-                        className={`text-sm font-medium leading-normal transition-colors ${isActive('/') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
+                        to="/dashboard"
+                        className={`text-sm font-medium leading-normal transition-colors ${isActive('/dashboard') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
                     >
                         Inicio
                     </Link>
