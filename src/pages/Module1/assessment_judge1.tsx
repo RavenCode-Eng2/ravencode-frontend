@@ -17,9 +17,21 @@ const AssessmentJudge1: React.FC = () => {
   const navigate = useNavigate();
 
   // Estado para el código en el editor
-  const [currentCode1, setCurrentCode1] = useState<string>(`# Escribe tu código aquí
-# Calcula el promedio de tres notas
+  const [currentCode1, setCurrentCode1] = useState<string>(`
 
+
+
+
+
+
+
+
+
+
+
+
+
+    
 `);
 
   // Estado para el lenguaje y tema
@@ -58,26 +70,50 @@ const AssessmentJudge1: React.FC = () => {
     setEvaluationResult(null);
 
     try {
-      // Primero, obtener el ID real del problema
+      console.log("Obteniendo lista de problemas...");
       const problems = await judgeService.getProblems();
+      console.log("Problemas obtenidos:", problems);
+      
       const promedioProblem = problems.find(p => p.title === "Cálculo de Promedio");
+      console.log("Problema encontrado:", promedioProblem);
       
       if (!promedioProblem) {
         toast.error("Problema no encontrado en el sistema");
         return;
       }
 
+      const problemId = promedioProblem?._id;
+      if (!problemId) {
+        toast.error("Error: ID del problema no encontrado");
+        return;
+      }
+      console.log("ID del problema:", problemId);
+
+      console.log("Enviando código al juez...");
+      console.log("Código a enviar:", currentCode1);
+      
       // Crear la submisión
       const submission = await judgeService.createSubmission({
-        problem_id: promedioProblem._id || promedioProblem.id || '',
+        problem_id: problemId,
         code: currentCode1,
         language: "python"
       });
 
+      console.log("Submission creada:", submission);
       toast.success("Código enviado al juez. Evaluando...");
 
+      const submissionId = submission._id;
+      if (!submissionId) {
+        toast.error("Error: ID de la submission no encontrado");
+        return;
+      }
+      console.log("ID de la submission:", submissionId);
+
       // Esperar el resultado
-      const result = await judgeService.waitForSubmissionResult(submission._id || submission.id || '');
+      console.log("Esperando resultado...");
+      const result = await judgeService.waitForSubmissionResult(submissionId);
+      console.log("Resultado recibido:", result);
+      
       setEvaluationResult(result);
 
       if (result.status === 'accepted') {
@@ -89,8 +125,12 @@ const AssessmentJudge1: React.FC = () => {
       }
 
     } catch (error) {
-      console.error("Error al enviar al juez:", error);
-      toast.error("Error al enviar el código al juez");
+      console.error("Error detallado al enviar al juez:", error);
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("Error desconocido al enviar el código al juez");
+      }
     } finally {
       setIsEvaluating(false);
     }

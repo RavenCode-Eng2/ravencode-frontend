@@ -59,11 +59,15 @@ export interface TestCase {
 
 class JudgeService {
   private async getAuthHeaders(): Promise<HeadersInit> {
+    console.log("Obteniendo headers de autenticación...");
+    
     // Intentar obtener el token del juez primero
     let token = localStorage.getItem('judge_access_token');
+    console.log("Token existente:", token ? "Sí" : "No");
     
     // Si no hay token del juez, intentar autenticarse
     if (!token) {
+      console.log("No hay token, intentando autenticación...");
       try {
         const response = await fetch(`${JUDGE_API_BASE_URL}/api/v1/auth/login`, {
           method: 'POST',
@@ -73,49 +77,89 @@ class JudgeService {
           body: 'username=admin&password=admin123'
         });
 
+        console.log("Respuesta de autenticación:", response.status);
+        
         if (response.ok) {
           const data = await response.json();
           token = data.access_token;
           localStorage.setItem('judge_access_token', token);
+          console.log("Nuevo token obtenido y guardado");
+        } else {
+          const errorText = await response.text();
+          console.error("Error en autenticación:", errorText);
+          throw new Error(`Error de autenticación: ${response.status} - ${errorText}`);
         }
       } catch (error) {
         console.error('Error al autenticarse con el juez:', error);
+        throw new Error('Error al autenticarse con el juez: ' + (error instanceof Error ? error.message : 'Error desconocido'));
       }
     }
 
-    return {
+    const headers = {
       'Content-Type': 'application/json',
       ...(token && { 'Authorization': `Bearer ${token}` })
     };
+    
+    console.log("Headers preparados:", headers);
+    return headers;
   }
 
   async createSubmission(submission: SubmissionRequest): Promise<SubmissionResponse> {
+    console.log("Creando submission...");
+    console.log("Datos de submission:", submission);
+    
     const headers = await this.getAuthHeaders();
-    const response = await fetch(`${JUDGE_API_BASE_URL}/api/v1/submissions/`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(submission)
-    });
+    console.log("Headers para submission:", headers);
+    
+    try {
+      const response = await fetch(`${JUDGE_API_BASE_URL}/api/v1/submissions/`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(submission)
+      });
 
-    if (!response.ok) {
-      throw new Error(`Error al crear submisión: ${response.statusText}`);
+      console.log("Respuesta de crear submission:", response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error al crear submission:", errorText);
+        throw new Error(`Error al crear submisión: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log("Submission creada:", data);
+      return data;
+    } catch (error) {
+      console.error("Error en createSubmission:", error);
+      throw new Error('Error al crear submission: ' + (error instanceof Error ? error.message : 'Error desconocido'));
     }
-
-    return response.json();
   }
 
   async getSubmission(submissionId: string): Promise<SubmissionResponse> {
+    console.log(`Obteniendo submission ${submissionId}...`);
+    
     const headers = await this.getAuthHeaders();
-    const response = await fetch(`${JUDGE_API_BASE_URL}/api/v1/submissions/${submissionId}`, {
-      method: 'GET',
-      headers
-    });
+    try {
+      const response = await fetch(`${JUDGE_API_BASE_URL}/api/v1/submissions/${submissionId}`, {
+        method: 'GET',
+        headers
+      });
 
-    if (!response.ok) {
-      throw new Error(`Error al obtener submisión: ${response.statusText}`);
+      console.log("Respuesta de get submission:", response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error al obtener submission:", errorText);
+        throw new Error(`Error al obtener submisión: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log("Submission obtenida:", data);
+      return data;
+    } catch (error) {
+      console.error("Error en getSubmission:", error);
+      throw new Error('Error al obtener submission: ' + (error instanceof Error ? error.message : 'Error desconocido'));
     }
-
-    return response.json();
   }
 
   async getProblem(problemId: string): Promise<Problem> {
@@ -148,20 +192,35 @@ class JudgeService {
 
   // Función para esperar a que la evaluación termine
   async waitForSubmissionResult(submissionId: string, maxWaitTime: number = 30000): Promise<SubmissionResponse> {
+    console.log(`Esperando resultado de submission ${submissionId}...`);
+    console.log(`Tiempo máximo de espera: ${maxWaitTime}ms`);
+    
     const startTime = Date.now();
+    let attempts = 0;
     
     while (Date.now() - startTime < maxWaitTime) {
-      const submission = await this.getSubmission(submissionId);
+      attempts++;
+      console.log(`Intento ${attempts} - Tiempo transcurrido: ${Date.now() - startTime}ms`);
       
-      if (submission.status === 'accepted' || submission.status === 'wrong_answer' || submission.status === 'error' || 
-          submission.status === 'time_limit_exceeded' || submission.status === 'runtime_error' || submission.status === 'compilation_error') {
-        return submission;
+      try {
+        const submission = await this.getSubmission(submissionId);
+        console.log(`Estado actual: ${submission.status}`);
+        
+        if (submission.status !== 'pending' && submission.status !== 'running') {
+          console.log("Resultado final obtenido:", submission);
+          return submission;
+        }
+        
+        // Esperar 1 segundo antes de verificar nuevamente
+        console.log("Esperando 1 segundo antes del siguiente intento...");
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      } catch (error) {
+        console.error(`Error en intento ${attempts}:`, error);
+        // Continuar intentando a pesar de errores
       }
-      
-      // Esperar 1 segundo antes de verificar nuevamente
-      await new Promise(resolve => setTimeout(resolve, 1000));
     }
     
+    console.error("Tiempo de espera agotado");
     throw new Error('Tiempo de espera agotado para la evaluación');
   }
 }
