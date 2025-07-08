@@ -20,6 +20,7 @@ import Lesson3 from './pages/Module1/Lesson3';
 import Lesson4 from './pages/Module1/Lesson4';
 import Lesson5 from "./pages/Module1/Lesson5";
 import Assesment1 from "./pages/Module1/Assesment1";
+import AssessmentJudge1 from "./pages/Module1/assessment_judge1";
 
 // Module 2 imports
 import IntroductionModule2 from './pages/Module2/Introduction';
@@ -84,6 +85,7 @@ function App() {
                             <Route path="/lesson4" element={<ProtectedRoute><CoursesLayout><Lesson4 /></CoursesLayout></ProtectedRoute>} />
                             <Route path="/lesson5" element={<ProtectedRoute><CoursesLayout><Lesson5 /></CoursesLayout></ProtectedRoute>} />
                             <Route path="/Assesment1" element={<ProtectedRoute><CoursesLayout><Assesment1 /></CoursesLayout></ProtectedRoute>} />
+                            <Route path="/AssessmentJudge1" element={<ProtectedRoute><CoursesLayout><AssessmentJudge1 /></CoursesLayout></ProtectedRoute>} />
 
                             {/* Module 2 routes */}
                             <Route path="/introduction-module2" element={<ProtectedRoute><CoursesLayout><IntroductionModule2 /></CoursesLayout></ProtectedRoute>} />
