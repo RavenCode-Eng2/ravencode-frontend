@@ -395,7 +395,7 @@ const Lesson5: React.FC<PageWithEditorsProps> = () => {
                   className=" px-6 py-3 text-base font-bold leading-normal"
                   onClick={handleButtonClick1}
                 >
-                  Ir a ejercicio evaluado
+                  Reto
                 </Button>
               </div>
             </div>

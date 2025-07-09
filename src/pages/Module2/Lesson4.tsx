@@ -40,7 +40,7 @@ const Lesson4 = () => {
     };
 
    const handleButtonClick1 = () => {
-        navigate('/assessment2')
+        navigate('/AssessmentJudge2')
     };
 
    // Función para ejecutar el código con Judge0
@@ -337,7 +337,7 @@ while intentos < 3:
                   className=" px-6 py-3 text-base font-bold leading-normal"
                   onClick={handleButtonClick1}
                 >
-                  Examen final
+                  Reto
                 </Button>
             </div>
         </div>
