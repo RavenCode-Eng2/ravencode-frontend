@@ -32,6 +32,9 @@ const courseData = [
         route: "/lesson4"
       },
       { title: "Lección 5", description: "Operaciones y expresiones", route: "/lesson5" },
+      { title: "Reto", description: "¡Reta tus conomientos!", route: "/AssessmentJudge1" },
+      { title: "Examen", description: "Prueba tus conocimientos", route: "/Assesment1" }
+      
     ],
   },
   {
@@ -58,10 +61,15 @@ const courseData = [
         route: "/lesson4-module2"
       },
       {
+        title: "Reto",
+        description: "¡Reta tus conomientos!",
+        route: "/AssessmentJudge2"
+      },
+      {
         title: "Examen",
         description: "Prueba tus conocimientos",
         route: "/assessment2"
-      },
+      }
     ],
   },
 

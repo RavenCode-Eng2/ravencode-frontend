@@ -10,7 +10,7 @@ import { dracula } from '@uiw/codemirror-theme-dracula';
 import { python } from '@codemirror/lang-python';
 import axios from 'axios';
 
-const AssessmentJudge1: React.FC = () => {
+const AssessmentJudge2: React.FC = () => {
   
   useEffect(() => {
     // Al montar el componente, llevar el scroll a la parte superior
@@ -20,7 +20,7 @@ const AssessmentJudge1: React.FC = () => {
   const navigate = useNavigate();
 
   // Estado para el código en el editor
-  const [currentCode1, setCurrentCode1] = useState<string>(`# Escribe acá tu código
+  const [currentCode1, setCurrentCode1] = useState<string>(`# Escribe acá tu código para el cajero automático
 
 `);
 
@@ -33,15 +33,12 @@ const AssessmentJudge1: React.FC = () => {
   const [evaluationResult, setEvaluationResult] = useState<SubmissionResponse | null>(null);
   const [isEvaluating, setIsEvaluating] = useState(false);
 
-  // ID del problema de promedio (se debe obtener del backend)
-  const PROBLEM_ID = "promedio_problem"; // Esto se debe actualizar con el ID real
-
   const handleButtonClick = () => {
-    navigate('/lesson5'); 
+    navigate('/lesson4-module2'); 
   };
 
   const handleButtonClick1 = () => {
-    navigate("/Assesment1");
+    navigate("/Assessment2");
   };
 
   // Función para ejecutar código localmente (como en Lesson1)
@@ -122,15 +119,15 @@ const AssessmentJudge1: React.FC = () => {
       const problems = await judgeService.getProblems();
       console.log("Problemas obtenidos:", problems);
       
-      const promedioProblem = problems.find(p => p.title === "Cálculo de Promedio");
-      console.log("Problema encontrado:", promedioProblem);
+      const cajeroProblem = problems.find(p => p.title === "Cajero Automático Personalizado");
+      console.log("Problema encontrado:", cajeroProblem);
       
-      if (!promedioProblem) {
+      if (!cajeroProblem) {
         toast.error("Problema no encontrado en el sistema");
         return;
       }
 
-      const problemId = promedioProblem?._id;
+      const problemId = cajeroProblem?._id;
       if (!problemId) {
         toast.error("Error: ID del problema no encontrado");
         return;
@@ -201,17 +198,17 @@ const AssessmentJudge1: React.FC = () => {
                 className="text-[#8e99cc] text-base font-medium leading-normal"
                 to="/courses"
               >
-                Fundamentos de Python
+                Estructuras de Control
               </Link>
               <span className="text-[#8e99cc] text-base font-medium leading-normal">
                 /
               </span>
               <span className="text-white text-base font-medium leading-normal">
-                Evaluación Juez Módulo 1
+                Evaluación Juez Módulo 2
               </span>
             </div>
             <h1 className="text-white tracking-light text-[35px] font-bold leading-tight px-4 text-left pb-3 pt-5">
-              Evaluación Juez Módulo 1
+              Evaluación Juez Módulo 2
             </h1>
 
             {/* Ejercicio de programación */}
@@ -221,38 +218,54 @@ const AssessmentJudge1: React.FC = () => {
               </h2>
               <div className="bg-[#1a2332] rounded-lg p-6 mb-6">
                 <h3 className="text-white text-lg font-bold mb-4">
-                  Primer ejercicio práctico
+                  Cajero Automático Personalizado
                 </h3>
                 <div className="text-white text-base leading-relaxed mb-4">
                   <p className="mb-3">
-                    Escribe un programa que calcule
-                    el promedio de tres notas ingresadas por el usuario.
+                    Vas a simular un cajero automático. Tu programa debe permitir que el usuario cree su propio PIN al inicio de la ejecución y luego interactúe con el sistema.
                   </p>
                   <p className="mb-3">
-                    <strong>El programa debe:</strong>
+                    <strong>El flujo es el siguiente:</strong>
+                  </p>
+                  <ol className="list-decimal pl-6 mb-4">
+                    <li>Pedirle al usuario que registre un PIN numérico (por ejemplo: 1234).</li>
+                    <li>Luego, permitirle hasta 3 intentos para escribir correctamente su PIN.</li>
+                    <li>Si lo logra, mostrar un menú con las siguientes opciones:
+                      <ul className="list-disc pl-6 mt-2">
+                        <li>1: Consultar saldo.</li>
+                        <li>2: Retirar dinero.</li>
+                        <li>3: Salir del sistema.</li>
+                      </ul>
+                    </li>
+                  </ol>
+
+                  <p className="mb-3">
+                    <strong>Reglas importantes:</strong>
                   </p>
                   <ul className="list-disc pl-6 mb-4">
-                    <li>Pedir el nombre del estudiante.</li>
-                    <li>Leer tres notas (pueden ser decimales).</li>
-                    <li>Calcular el promedio.</li>
-                    <li>
-                      Imprimir el mensaje: [nombre] tiene un promedio de
-                      [promedio]
-                    </li>
+                    <li>El saldo inicial es 500000.</li>
+                    <li>Si elige retirar dinero, verificar si el monto es posible y mostrar el saldo restante.</li>
+                    <li>Si falla 3 veces el PIN, mostrar "Tarjeta bloqueada" y finalizar.</li>
+                    <li>El programa termina cuando el usuario selecciona la opción 3.</li>
                   </ul>
 
                   <div className="bg-[#0d1117] rounded p-4 mb-4">
                     <h4 className="text-green-400 font-bold mb-2">
                       ✅ Entrada de ejemplo:
                     </h4>
-                    <p className="text-gray-300">
+                    <p className="text-gray-300 mb-2">
                       El programa debe leer, en este orden:
                     </p>
-                    <div className="font-mono text-sm mt-2">
-                      <div>Ana</div>
-                      <div>4.5</div>
-                      <div>3.7</div>
-                      <div>4.2</div>
+                    <div className="font-mono text-sm">
+                      <div>4321</div>
+                      <div>1111</div>
+                      <div>1234</div>
+                      <div>4321</div>
+                      <div>1</div>
+                      <div>2</div>
+                      <div>100000</div>
+                      <div>1</div>
+                      <div>3</div>
                     </div>
                   </div>
 
@@ -261,7 +274,13 @@ const AssessmentJudge1: React.FC = () => {
                       ✅ Salida de ejemplo:
                     </h4>
                     <div className="font-mono text-sm">
-                      Ana tiene un promedio de 4.13
+                      <div>PIN incorrecto</div>
+                      <div>PIN incorrecto</div>
+                      <div>Bienvenido al cajero.</div>
+                      <div>Saldo actual: 500000</div>
+                      <div>Cantidad retirada: 100000</div>
+                      <div>Saldo actual: 400000</div>
+                      <div>Gracias por usar el cajero.</div>
                     </div>
                   </div>
                 </div>
@@ -316,7 +335,7 @@ const AssessmentJudge1: React.FC = () => {
                     <textarea
                         value={userInput}
                         onChange={(e) => setUserInput(e.target.value)}
-                        placeholder="Ingresa aquí los datos que tu programa necesita (ej: Ana&#10;4.5&#10;3.7&#10;4.2)"
+                        placeholder="Ingresa aquí los datos que tu programa necesita (ej: 4321&#10;1111&#10;1234&#10;4321&#10;1&#10;2&#10;100000&#10;1&#10;3)"
                         className="w-full p-3 bg-[#2d2d2d] text-white border border-[#444] rounded-lg font-mono text-sm resize-none"
                         rows={5}
                     />
@@ -458,4 +477,4 @@ const AssessmentJudge1: React.FC = () => {
   );
 };
 
-export default AssessmentJudge1; 
+export default AssessmentJudge2;
