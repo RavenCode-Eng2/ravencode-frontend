@@ -51,7 +51,7 @@ const Lesson5: React.FC<PageWithEditorsProps> = () => {
       };
   
      const handleButtonClick1 = () => {
-          navigate('/Assesment1')
+          navigate("/AssessmentJudge1");
       };
   
   return (
@@ -395,7 +395,7 @@ const Lesson5: React.FC<PageWithEditorsProps> = () => {
                   className=" px-6 py-3 text-base font-bold leading-normal"
                   onClick={handleButtonClick1}
                 >
-                  Empezar evaluación
+                  Reto
                 </Button>
               </div>
             </div>
