@@ -94,3 +94,35 @@ El formato sigue la convención de [Keep a Changelog](https://keepachangelog.com
 - Sistema de navegación entre lecciones
 - Integración con servicios de backend 
 
+## 2025-07-10
+- **Author:** Valentina Pabón Cabezas
+  **Date:** 2025-07-10 10:20:44
+  **Title:** Release/judge (#91)
+  **Description:** * Update Header.tsx
+
+* Introduction and Lesson1
+
+* Create Lesson2.tsx
+
+* Lesson 3
+
+* Lesson 4
+
+* Create Assessment2.tsx
+
+* Update Courses.tsx
+
+* Bloqueo de modulos
+
+* judge service created
+
+assessment_judge for module 1 created
+
+* integration with judge completed
+
+* Assessment judge module 2
+
+---------
+
+Co-authored-by: DIEG0FELIPE <dsolorzanoa@unal.edu.co>
+Co-authored-by: Diego Solorzano <113936842+DIEG0FELIPE@users.noreply.github.com>
