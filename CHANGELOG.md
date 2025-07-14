@@ -1,3 +1,4 @@
+
 # Changelog
 
 Todos los cambios importantes de este proyecto se documentan en este archivo.
@@ -82,11 +83,15 @@ Todos los cambios importantes de este proyecto se documentan en este archivo.
 
 ---
 
+
 ## [1.0.0] - 2025-06-13
+
 ### Added
 - Versión inicial del proyecto RavenCode Frontend
 - Sistema de autenticación completo
 - Módulos de aprendizaje interactivos
 - Editor de código integrado
 - Sistema de navegación entre lecciones
+
 - Integración con servicios de backend 
+
