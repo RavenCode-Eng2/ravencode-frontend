@@ -6,7 +6,9 @@ export interface SubmissionRequest {
   problem_id: string;
   code: string;
   language: string;
+
   email: string;  // Agregar campo email
+
 }
 
 export interface SubmissionResponse {
@@ -63,7 +65,9 @@ class JudgeService {
     console.log("Obteniendo headers de autenticación...");
     
     // Intentar obtener el token del juez primero
+
     let token: string | null = localStorage.getItem('judge_access_token');
+
     console.log("Token existente:", token ? "Sí" : "No");
     
     // Si no hay token del juez, intentar autenticarse
@@ -82,6 +86,7 @@ class JudgeService {
         
         if (response.ok) {
           const data = await response.json();
+
           if (data.access_token) {
             token = data.access_token;
             localStorage.setItem('judge_access_token', token);
@@ -89,6 +94,7 @@ class JudgeService {
           } else {
             throw new Error('No se recibió token de acceso');
           }
+
         } else {
           const errorText = await response.text();
           console.error("Error en autenticación:", errorText);
@@ -140,12 +146,14 @@ class JudgeService {
     }
   }
 
+
   async getSubmission(submissionId: string, email: string): Promise<SubmissionResponse> {
     console.log(`Obteniendo submission ${submissionId} para email ${email}...`);
     
     const headers = await this.getAuthHeaders();
     try {
       const response = await fetch(`${JUDGE_API_BASE_URL}/api/v1/submissions/${submissionId}?email=${encodeURIComponent(email)}`, {
+
         method: 'GET',
         headers
       });
@@ -166,6 +174,7 @@ class JudgeService {
       throw new Error('Error al obtener submission: ' + (error instanceof Error ? error.message : 'Error desconocido'));
     }
   }
+
 
   async deleteSubmission(submissionId: string, email: string): Promise<void> {
     console.log(`Eliminando submission ${submissionId} para email ${email}...`);
@@ -195,6 +204,7 @@ class JudgeService {
     }
   }
 
+
   async getProblem(problemId: string): Promise<Problem> {
     const headers = await this.getAuthHeaders();
     const response = await fetch(`${JUDGE_API_BASE_URL}/api/v1/problems/${problemId}`, {
@@ -222,6 +232,7 @@ class JudgeService {
 
     return response.json();
   }
+
 
   async getSubmissions(email: string): Promise<SubmissionResponse[]> {
     console.log(`Obteniendo submissions para email ${email}...`);
@@ -253,6 +264,7 @@ class JudgeService {
   // Función para esperar a que la evaluación termine
   async waitForSubmissionResult(submissionId: string, email: string, maxWaitTime: number = 30000): Promise<SubmissionResponse> {
     console.log(`Esperando resultado de submission ${submissionId} para email ${email}...`);
+
     console.log(`Tiempo máximo de espera: ${maxWaitTime}ms`);
     
     const startTime = Date.now();
@@ -263,7 +275,9 @@ class JudgeService {
       console.log(`Intento ${attempts} - Tiempo transcurrido: ${Date.now() - startTime}ms`);
       
       try {
+
         const submission = await this.getSubmission(submissionId, email);
+
         console.log(`Estado actual: ${submission.status}`);
         
         if (submission.status !== 'pending' && submission.status !== 'running') {

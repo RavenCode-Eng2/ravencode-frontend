@@ -1,3 +1,4 @@
+
 # Changelog
 
 Todos los cambios importantes de este proyecto se documentan en este archivo.
@@ -92,3 +93,4 @@ El formato sigue la convención de [Keep a Changelog](https://keepachangelog.com
 - Editor de código integrado
 - Sistema de navegación entre lecciones
 - Integración con servicios de backend 
+

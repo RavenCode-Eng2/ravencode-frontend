@@ -1,17 +1,27 @@
+
 import React, { useState, useEffect } from "react";
 import { theme } from "../../theme";
 import Button from "../../components/Button";
 import { Link, useNavigate } from 'react-router-dom'; 
+
+import React, { useState } from "react";
+import { theme } from "../../theme";
+import Button from "../../components/Button";
+import { Link, useNavigate } from 'react-router-dom'; 
+import { useEffect } from "react";
+
 import { judgeService, SubmissionResponse } from "../../services/judgeService";
 import toast from "react-hot-toast";
 import CodeMirror from '@uiw/react-codemirror';
 import { dracula } from '@uiw/codemirror-theme-dracula';
 import { python } from '@codemirror/lang-python';
+
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 
 const AssessmentJudge1: React.FC = () => {
   const { user } = useAuth();  // Obtener el usuario autenticado
+
   
   useEffect(() => {
     // Al montar el componente, llevar el scroll a la parte superior
@@ -110,6 +120,7 @@ const AssessmentJudge1: React.FC = () => {
   };
 
   const handleSubmitToJudge = async () => {
+
     if (!user) {
       toast.error("Debes estar autenticado para enviar código al juez");
       return;
@@ -142,11 +153,14 @@ const AssessmentJudge1: React.FC = () => {
         return;
       }
       console.log("ID del problema:", problemId);
+
       console.log("Email del usuario:", user.Correo_electronico);
+
 
       console.log("Enviando código al juez...");
       console.log("Código a enviar:", currentCode1);
       
+
       // Crear la submisión con el email del usuario
       const submission = await judgeService.createSubmission({
         problem_id: problemId,
@@ -167,6 +181,7 @@ const AssessmentJudge1: React.FC = () => {
 
       // Esperar el resultado
       console.log("Esperando resultado...");
+
       const result = await judgeService.waitForSubmissionResult(submissionId, user.Correo_electronico);
       console.log("Resultado recibido:", result);
       
