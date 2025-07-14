@@ -31,6 +31,10 @@ import Lesson4Module2 from './pages/Module2/Lesson4';
 import Assessment2 from './pages/Module2/Assessment2';
 import AssessmentJudge2 from './pages/Module2/assessment_judge2';
 
+
+import MySubmissions from './pages/MySubmissions';
+
+
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -77,6 +81,7 @@ function App() {
                             <Route path="/courses" element={<ProtectedRoute><CoursesLayout><Courses /></CoursesLayout></ProtectedRoute>} />
                             <Route path="/my-courses" element={<ProtectedRoute><DashboardLayout><MyCourses /></DashboardLayout></ProtectedRoute>} />
                             <Route path="/settings" element={<ProtectedRoute><DashboardLayout><Settings /></DashboardLayout></ProtectedRoute>} />
+                            <Route path="/my-submissions" element={<ProtectedRoute><DashboardLayout><MySubmissions /></DashboardLayout></ProtectedRoute>} />
 
                             {/* Module 1 routes */}
                             <Route path="/introduction" element={<ProtectedRoute><CoursesLayout><Introduction /></CoursesLayout></ProtectedRoute>} />

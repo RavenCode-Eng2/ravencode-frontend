@@ -42,6 +42,14 @@ const Header: React.FC = () => {
                             Mis Cursos
                         </Link>
                     )}
+                    {isAuthenticated && (
+                        <Link
+                            to="/my-submissions"
+                            className={`text-sm font-medium leading-normal transition-colors ${isActive('/my-submissions') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
+                        >
+                            Mis Submissions
+                        </Link>
+                    )}
                     <Link
                         to="/help"
                         className={`text-sm font-medium leading-normal transition-colors ${isActive('/help') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
