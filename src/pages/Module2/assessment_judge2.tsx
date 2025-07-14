@@ -4,11 +4,13 @@ import { theme } from "../../theme";
 import Button from "../../components/Button";
 import { Link, useNavigate } from 'react-router-dom'; 
 
+
 import React, { useState } from "react";
 import { theme } from "../../theme";
 import Button from "../../components/Button";
 import { Link, useNavigate } from 'react-router-dom'; 
 import { useEffect } from "react";
+
 
 import { judgeService, SubmissionResponse } from "../../services/judgeService";
 import toast from "react-hot-toast";
@@ -159,10 +161,8 @@ const AssessmentJudge2: React.FC = () => {
 
       console.log("Email del usuario:", user.Correo_electronico);
 
-
       console.log("Enviando código al juez...");
       console.log("Código a enviar:", currentCode1);
-      
 
       // Crear la submisión con el email del usuario
       const submission = await judgeService.createSubmission({

@@ -156,7 +156,6 @@ const AssessmentJudge1: React.FC = () => {
 
       console.log("Email del usuario:", user.Correo_electronico);
 
-
       console.log("Enviando código al juez...");
       console.log("Código a enviar:", currentCode1);
       
