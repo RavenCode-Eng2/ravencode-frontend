@@ -2,9 +2,7 @@
 
 Todos los cambios importantes de este proyecto se documentan en este archivo.
 
-El formato sigue la convención de [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
 ### Added
 - Módulo 2 completo con 4 lecciones (Lesson1, Lesson2, Lesson3, Lesson4)
 - Sistema de bloqueo del Módulo 2 basado en aprobación del examen del Módulo 1
@@ -84,7 +82,7 @@ El formato sigue la convención de [Keep a Changelog](https://keepachangelog.com
 
 ---
 
-## [1.0.0] - 2025-01-XX
+## [1.0.0] - 2025-06-13
 ### Added
 - Versión inicial del proyecto RavenCode Frontend
 - Sistema de autenticación completo
