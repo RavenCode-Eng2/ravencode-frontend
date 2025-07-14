@@ -43,4 +43,57 @@ export interface User {
 export interface ErrorResponse {
   detail: string;
   status_code: number;
+}
+
+// Achievement and Diploma types
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  category: string;
+  rarity: 'common' | 'rare' | 'epic' | 'legendary';
+  dateEarned?: string;
+  isEarned: boolean;
+  requirements: string[];
+  xpReward: number;
+}
+
+export interface Diploma {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  courseId: string;
+  courseName: string;
+  dateEarned: string;
+  certificateUrl?: string;
+  skills: string[];
+}
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  level: number;
+  xp: number;
+  joinDate: string;
+  achievements: Achievement[];
+  diplomas: Diploma[];
+  stats: {
+    coursesCompleted: number;
+    totalXp: number;
+    currentStreak: number;
+    longestStreak: number;
+    problemsSolved: number;
+    rank: string;
+  };
+}
+
+export interface UserAchievements {
+  profile: UserProfile;
+  achievements: Achievement[];
+  diplomas: Diploma[];
+  nextAchievements: Achievement[];
 } 

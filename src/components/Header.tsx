@@ -44,10 +44,26 @@ const Header: React.FC = () => {
                     )}
                     {isAuthenticated && (
                         <Link
+                            to="/achievements"
+                            className={`text-sm font-medium leading-normal transition-colors ${isActive('/achievements') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
+                        >
+                            Logros
+                        </Link>
+                    )}
+                    {isAuthenticated && (
+                        <Link
                             to="/my-submissions"
                             className={`text-sm font-medium leading-normal transition-colors ${isActive('/my-submissions') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
                         >
                             Mis Submissions
+                        </Link>
+                    )}
+                    {isAuthenticated && (
+                        <Link
+                            to="/achievements"
+                            className={`text-sm font-medium leading-normal transition-colors ${isActive('/achievements') ? 'text-[#0b79ee]' : 'text-white hover:text-[#0b79ee]'}`}
+                        >
+                            Logros
                         </Link>
                     )}
                     <Link

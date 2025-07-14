@@ -33,6 +33,7 @@ import AssessmentJudge2 from './pages/Module2/assessment_judge2';
 
 
 import MySubmissions from './pages/MySubmissions';
+import Achievements from './pages/Achievements';
 
 
 import { AuthProvider } from './context/AuthContext';
@@ -82,6 +83,7 @@ function App() {
                             <Route path="/my-courses" element={<ProtectedRoute><DashboardLayout><MyCourses /></DashboardLayout></ProtectedRoute>} />
                             <Route path="/settings" element={<ProtectedRoute><DashboardLayout><Settings /></DashboardLayout></ProtectedRoute>} />
                             <Route path="/my-submissions" element={<ProtectedRoute><DashboardLayout><MySubmissions /></DashboardLayout></ProtectedRoute>} />
+                            <Route path="/achievements" element={<ProtectedRoute><DashboardLayout><Achievements /></DashboardLayout></ProtectedRoute>} />
 
                             {/* Module 1 routes */}
                             <Route path="/introduction" element={<ProtectedRoute><CoursesLayout><Introduction /></CoursesLayout></ProtectedRoute>} />
