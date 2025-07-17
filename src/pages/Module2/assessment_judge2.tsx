@@ -137,7 +137,7 @@ const AssessmentJudge2: React.FC = () => {
       const problems = await judgeService.getProblems();
       console.log("Problemas obtenidos:", problems);
       
-      const cajeroProblem = problems.find(p => p.title === "Cajero Automático Personalizado");
+      const cajeroProblem = problems.find(p => p.title === "Módulo 2");
       console.log("Problema encontrado:", cajeroProblem);
       
       if (!cajeroProblem) {

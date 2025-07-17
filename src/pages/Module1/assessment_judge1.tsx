@@ -134,7 +134,7 @@ const AssessmentJudge1: React.FC = () => {
       const problems = await judgeService.getProblems();
       console.log("Problemas obtenidos:", problems);
       
-      const promedioProblem = problems.find(p => p.title === "Cálculo de Promedio");
+      const promedioProblem = problems.find(p => p.title === "Módulo 1");
       console.log("Problema encontrado:", promedioProblem);
       
       if (!promedioProblem) {
