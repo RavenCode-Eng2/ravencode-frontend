@@ -4,11 +4,6 @@ import { theme } from "../../theme";
 import Button from "../../components/Button";
 import { Link, useNavigate } from 'react-router-dom'; 
 
-import React, { useState } from "react";
-import { theme } from "../../theme";
-import Button from "../../components/Button";
-import { Link, useNavigate } from 'react-router-dom'; 
-import { useEffect } from "react";
 
 import { judgeService, SubmissionResponse } from "../../services/judgeService";
 import toast from "react-hot-toast";
