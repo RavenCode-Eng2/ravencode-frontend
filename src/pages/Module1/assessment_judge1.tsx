@@ -4,7 +4,6 @@ import { theme } from "../../theme";
 import Button from "../../components/Button";
 import { Link, useNavigate } from 'react-router-dom'; 
 
-
 import { judgeService, SubmissionResponse } from "../../services/judgeService";
 import toast from "react-hot-toast";
 import CodeMirror from '@uiw/react-codemirror';
@@ -17,7 +16,7 @@ import axios from 'axios';
 const AssessmentJudge1: React.FC = () => {
   const { user } = useAuth();  // Obtener el usuario autenticado
 
-  
+
   useEffect(() => {
     // Al montar el componente, llevar el scroll a la parte superior
     window.scrollTo(0, 0);
@@ -43,7 +42,7 @@ const AssessmentJudge1: React.FC = () => {
   const PROBLEM_ID = "promedio_problem"; // Esto se debe actualizar con el ID real
 
   const handleButtonClick = () => {
-    navigate('/lesson5'); 
+    navigate('/lesson5');
   };
 
   const handleButtonClick1 = () => {
@@ -133,10 +132,9 @@ const AssessmentJudge1: React.FC = () => {
       console.log("Obteniendo lista de problemas...");
       const problems = await judgeService.getProblems();
       console.log("Problemas obtenidos:", problems);
-      
-      const promedioProblem = problems.find(p => p.title === "Módulo 1");
+      const promedioProblem = problems.find(p => p.title === "Cálculo de Promedio");
       console.log("Problema encontrado:", promedioProblem);
-      
+
       if (!promedioProblem) {
         toast.error("Problema no encontrado en el sistema");
         return;
@@ -153,7 +151,7 @@ const AssessmentJudge1: React.FC = () => {
 
       console.log("Enviando código al juez...");
       console.log("Código a enviar:", currentCode1);
-      
+
 
       // Crear la submisión con el email del usuario
       const submission = await judgeService.createSubmission({
@@ -178,7 +176,7 @@ const AssessmentJudge1: React.FC = () => {
 
       const result = await judgeService.waitForSubmissionResult(submissionId, user.Correo_electronico);
       console.log("Resultado recibido:", result);
-      
+
       setEvaluationResult(result);
 
       if (result.status === 'accepted') {
@@ -287,80 +285,80 @@ const AssessmentJudge1: React.FC = () => {
 
             {/* Editor de código con estructura visual de Lesson1 */}
             <div className="console-container mb-6 px-4">
-                <div className="console-box">
-                    <CodeMirror
-                        value={currentCode1}
-                        height="200px"
-                        theme={dracula}
-                        extensions={[python()]}
-                        onChange={(value) => setCurrentCode1(value)}
-                        basicSetup={{
-                            lineNumbers: true,
-                            highlightActiveLineGutter: true,
-                            highlightSpecialChars: true,
-                            history: true,
-                            foldGutter: true,
-                            drawSelection: true,
-                            dropCursor: true,
-                            allowMultipleSelections: true,
-                            indentOnInput: true,
-                            syntaxHighlighting: true,
-                            bracketMatching: true,
-                            closeBrackets: true,
-                            autocompletion: true,
-                            rectangularSelection: true,
-                            crosshairCursor: true,
-                            highlightActiveLine: true,
-                            highlightSelectionMatches: true,
-                            closeBracketsKeymap: true,
-                            defaultKeymap: true,
-                            searchKeymap: true,
-                            historyKeymap: true,
-                            foldKeymap: true,
-                            completionKeymap: true,
-                            lintKeymap: true,
-                        }}
-                    />
-                </div>
+              <div className="console-box">
+                <CodeMirror
+                  value={currentCode1}
+                  height="200px"
+                  theme={dracula}
+                  extensions={[python()]}
+                  onChange={(value) => setCurrentCode1(value)}
+                  basicSetup={{
+                    lineNumbers: true,
+                    highlightActiveLineGutter: true,
+                    highlightSpecialChars: true,
+                    history: true,
+                    foldGutter: true,
+                    drawSelection: true,
+                    dropCursor: true,
+                    allowMultipleSelections: true,
+                    indentOnInput: true,
+                    syntaxHighlighting: true,
+                    bracketMatching: true,
+                    closeBrackets: true,
+                    autocompletion: true,
+                    rectangularSelection: true,
+                    crosshairCursor: true,
+                    highlightActiveLine: true,
+                    highlightSelectionMatches: true,
+                    closeBracketsKeymap: true,
+                    defaultKeymap: true,
+                    searchKeymap: true,
+                    historyKeymap: true,
+                    foldKeymap: true,
+                    completionKeymap: true,
+                    lintKeymap: true,
+                  }}
+                />
+              </div>
             </div>
 
             {/* Entrada de usuario y botón de ejecutar (como en Lesson1) */}
             <div className="flex flex-col gap-4 mb-4 px-4">
-                <div className="flex flex-col gap-2">
-                    <label className="text-white text-sm font-medium">
-                        Entrada del programa (stdin):
-                    </label>
-                    <textarea
-                        value={userInput}
-                        onChange={(e) => setUserInput(e.target.value)}
-                        placeholder="Ingresa aquí los datos que tu programa necesita (ej: Ana&#10;4.5&#10;3.7&#10;4.2)"
-                        className="w-full p-3 bg-[#2d2d2d] text-white border border-[#444] rounded-lg font-mono text-sm resize-none"
-                        rows={5}
-                    />
-                </div>
-                <div className="flex justify-end">
-                    <Button
-                        size="md"
-                        variant="primary"
-                        className="px-6 py-3 text-base font-bold leading-normal"
-                        onClick={handleRunCode}
-                        disabled={isRunning}
-                    >
-                        {isRunning ? 'Ejecutando...' : 'Ejecutar código'}
-                    </Button>
-                </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-white text-sm font-medium">
+                  Entrada del programa (stdin):
+                </label>
+                <textarea
+                  value={userInput}
+                  onChange={(e) => setUserInput(e.target.value)}
+                  placeholder="Ingresa aquí los datos que tu programa necesita (ej: Ana&#10;4.5&#10;3.7&#10;4.2)"
+                  className="w-full p-3 bg-[#2d2d2d] text-white border border-[#444] rounded-lg font-mono text-sm resize-none"
+                  rows={5}
+                />
+              </div>
+              <div className="flex justify-end">
+                <Button
+                  size="md"
+                  variant="primary"
+                  className="px-6 py-3 text-base font-bold leading-normal"
+                  onClick={handleRunCode}
+                  disabled={isRunning}
+                >
+                  {isRunning ? 'Ejecutando...' : 'Ejecutar código'}
+                </Button>
+              </div>
             </div>
 
             {/* Output (como en Lesson1) */}
             <div className="console-container mb-6 px-4">
-                <div className="console-box">
-                    <div className="bg-[#1e1e1e] text-white p-4 rounded-t-lg border-b border-[#333]">
-                        <h3 className="text-sm font-bold">Output:</h3>
-                    </div>
-                    <div className="bg-[#1e1e1e] text-white p-4 rounded-b-lg min-h-[100px] font-mono text-sm">
-                        <pre className="whitespace-pre-wrap">{output}</pre>
-                    </div>
+              <div className="console-box">
+                <div className="bg-[#1e1e1e] text-white p-4 rounded-t-lg border-b border-[#333]">
+                  <h3 className="text-sm font-bold">Output:</h3>
                 </div>
+                <div className="bg-[#1e1e1e] text-white p-4 rounded-b-lg min-h-[100px] font-mono text-sm">
+                  <pre className="whitespace-pre-wrap">{output}</pre>
+                </div>
+              </div>
             </div>
 
             {/* Botón de envío al juez */}
@@ -380,17 +378,15 @@ const AssessmentJudge1: React.FC = () => {
             {/* Resultados de la evaluación */}
             {evaluationResult && (
               <div className="mt-6 px-4">
-                <div className={`rounded-lg p-6 ${
-                  evaluationResult.status === 'accepted' 
-                    ? 'bg-green-900/20 border border-green-500' 
+                <div className={`rounded-lg p-6 ${evaluationResult.status === 'accepted'
+                    ? 'bg-green-900/20 border border-green-500'
                     : 'bg-red-900/20 border border-red-500'
-                }`}>
-                  <h3 className={`text-lg font-bold mb-4 ${
-                    evaluationResult.status === 'accepted' ? 'text-green-400' : 'text-red-400'
                   }`}>
+                  <h3 className={`text-lg font-bold mb-4 ${evaluationResult.status === 'accepted' ? 'text-green-400' : 'text-red-400'
+                    }`}>
                     {evaluationResult.status === 'accepted' ? '✅ Evaluación Exitosa' : '❌ Evaluación Fallida'}
                   </h3>
-                  
+
                   <div className="space-y-2">
                     <p className="text-white">
                       <strong>Estado:</strong> {evaluationResult.status}
@@ -417,12 +413,10 @@ const AssessmentJudge1: React.FC = () => {
                       <h4 className="text-white font-bold mb-2">Resultados de casos de prueba:</h4>
                       <div className="space-y-2">
                         {evaluationResult.test_case_results.map((result, index) => (
-                          <div key={result._id || result.id} className={`p-3 rounded ${
-                            result.status === 'passed' ? 'bg-green-800/30' : 'bg-red-800/30'
-                          }`}>
-                            <p className={`font-medium ${
-                              result.status === 'passed' ? 'text-green-300' : 'text-red-300'
+                          <div key={result._id || result.id} className={`p-3 rounded ${result.status === 'passed' ? 'bg-green-800/30' : 'bg-red-800/30'
                             }`}>
+                            <p className={`font-medium ${result.status === 'passed' ? 'text-green-300' : 'text-red-300'
+                              }`}>
                               Caso {index + 1}: {result.status === 'passed' ? '✅ Pasó' : '❌ Falló'}
                             </p>
                             {result.output && (

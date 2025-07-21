@@ -26,3 +26,44 @@
     box-sizing: border-box;
   }
 }
+
+@layer components {
+  .modules-progress-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  @media (min-width: 1080px) {
+    .modules-progress-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Custom scrollbar for notifications */
+  .notifications-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #3b4754 #1a2332;
+  }
+
+  .notifications-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .notifications-scrollbar::-webkit-scrollbar-track {
+    background: #1a2332;
+    border-radius: 4px;
+  }
+
+  .notifications-scrollbar::-webkit-scrollbar-thumb {
+    background: #3b4754;
+    border-radius: 4px;
+    border: 1px solid #283039;
+  }
+
+  .notifications-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #4a5562;
+  }
+
+  .notifications-scrollbar::-webkit-scrollbar-corner {
+    background: #1a2332;
+  }
+}
