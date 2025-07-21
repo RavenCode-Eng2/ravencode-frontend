@@ -11,21 +11,22 @@ const Settings: React.FC = () => {
     const updateUserMutation = useUpdateUser();
 
     const [formData, setFormData] = useState({
-        Nombre: '',
-        Correo_electronico: '',
-        Institucion_educativa: '',
-        Grado_academico: '',
-        Foto_de_perfil: '',
+        nombre: '',
+        correo_electronico: '',
+        departamento: '',
+        fecha_de_nacimiento: '',
+        foto_de_perfil: '',
     });
 
     useEffect(() => {
         if (user) {
+            console.log('Current user data:', user); // Debug log
             setFormData({
-                Nombre: user.Nombre || '',
-                Correo_electronico: user.Correo_electronico || '',
-                Institucion_educativa: user.Institucion_educativa || '',
-                Grado_academico: user.Grado_academico || '',
-                Foto_de_perfil: user.Foto_de_perfil || '',
+                nombre: user.nombre || '',
+                correo_electronico: user.correo_electronico || '',
+                departamento: user.departamento || '',
+                fecha_de_nacimiento: user.fecha_de_nacimiento || '',
+                foto_de_perfil: user.foto_de_perfil || '',
             });
         }
     }, [user]);
@@ -40,13 +41,13 @@ const Settings: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!user?.Correo_electronico) {
+        if (!user?.correo_electronico) {
             toast.error('No se pudo identificar al usuario');
             return;
         }
         try {
             await updateUserMutation.mutateAsync({
-                email: user.Correo_electronico,
+                email: user.correo_electronico,
                 userData: formData
             });
             await refreshUser();
@@ -73,35 +74,35 @@ const Settings: React.FC = () => {
                 <div className="space-y-4">
                     <Input
                         type="text"
-                        id="Nombre"
-                        name="Nombre"
+                        id="nombre"
+                        name="nombre"
                         label="Nombre completo"
-                        value={formData.Nombre}
+                        value={formData.nombre}
                         onChange={handleInputChange}
                         required
                     />
                     <Input
                         type="email"
-                        id="Correo_electronico"
-                        name="Correo_electronico"
+                        id="correo_electronico"
+                        name="correo_electronico"
                         label="Correo electrónico"
-                        value={formData.Correo_electronico}
+                        value={formData.correo_electronico}
                         disabled
                     />
                     <Input
                         type="text"
-                        id="Institucion_educativa"
-                        name="Institucion_educativa"
-                        label="Institución educativa"
-                        value={formData.Institucion_educativa}
+                        id="departamento"
+                        name="departamento"
+                        label="Departamento"
+                        value={formData.departamento}
                         onChange={handleInputChange}
                     />
                     <Input
-                        type="text"
-                        id="Grado_academico"
-                        name="Grado_academico"
-                        label="Grado académico"
-                        value={formData.Grado_academico}
+                        type="date"
+                        id="fecha_de_nacimiento"
+                        name="fecha_de_nacimiento"
+                        label="Fecha de nacimiento"
+                        value={formData.fecha_de_nacimiento}
                         onChange={handleInputChange}
                     />
                 </div>

@@ -3,6 +3,7 @@ import { authService } from '../services/authService';
 import { userService } from '../services/userService';
 import { learningService } from '../services/learningService';
 import { ApiResponse, Usuario, Leccion, Token } from '../types';
+import { TokenManager } from '../utils/tokenManager';
 
 interface LoginCredentials {
   email: string;
@@ -15,10 +16,69 @@ export const useLogin = () => {
   
   return useMutation({
     mutationFn: authService.login,
-    onSuccess: (data) => {
-      localStorage.setItem('token', data.data.access_token);
+    onSuccess: async (data) => {
+      console.log('[useLogin] Login successful, tokens received:', {
+        hasAccessToken: !!data.data.access_token,
+        hasRefreshToken: !!data.data.refresh_token
+      });
+      
+      // Store both access and refresh tokens
+      TokenManager.setTokens(data.data);
+      console.log('[useLogin] Tokens stored in localStorage');
+      
+      // Fetch and cache user data immediately after login
+      try {
+        console.log('[useLogin] Fetching user data...');
+        const userResponse = await userService.getCurrentUser();
+        if (userResponse.data) {
+          TokenManager.setUserData(userResponse.data);
+          console.log('[useLogin] User data fetched and cached');
+        }
+      } catch (error) {
+        console.error('[useLogin] Failed to fetch user data:', error);
+      }
+      
       queryClient.invalidateQueries({ queryKey: ['users'] });
+      console.log('[useLogin] Users query invalidated');
     },
+    onError: (error) => {
+      console.error('[useLogin] Login mutation error:', error);
+    }
+  });
+};
+
+export const useRefreshToken = () => {
+  return useMutation({
+    mutationFn: () => {
+      const refreshToken = TokenManager.getRefreshToken();
+      if (!refreshToken) {
+        throw new Error('No refresh token available');
+      }
+      return authService.refresh(refreshToken);
+    },
+    onSuccess: (data) => {
+      console.log('[useRefreshToken] Token refresh successful');
+      TokenManager.setTokens(data.data);
+    },
+    onError: (error) => {
+      console.error('[useRefreshToken] Token refresh failed:', error);
+      TokenManager.clearTokens();
+    }
+  });
+};
+
+export const useLogout = () => {
+  return useMutation({
+    mutationFn: authService.logout,
+    onSuccess: () => {
+      console.log('[useLogout] Logout successful');
+      TokenManager.clearTokens();
+    },
+    onError: (error) => {
+      console.error('[useLogout] Logout failed:', error);
+      // Clear tokens anyway on logout error
+      TokenManager.clearTokens();
+    }
   });
 };
 
@@ -30,15 +90,15 @@ export const useRequestRecoveryCode = () => {
 
 export const useVerifyRecoveryCode = () => {
   return useMutation({
-    mutationFn: ({ email, code }: { email: string; code: string }) =>
-      authService.verifyRecoveryCode(email, code),
+    mutationFn: ({ email, code, new_password }: { email: string; code: string; new_password: string }) =>
+      authService.verifyAndUpdatePassword({ email, code, new_password }),
   });
 };
 
 export const useUpdatePassword = () => {
   return useMutation({
-    mutationFn: ({ email, newPassword }: { email: string; newPassword: string }) =>
-      authService.updatePassword(email, newPassword),
+    mutationFn: ({ email, code, new_password }: { email: string; code: string; new_password: string }) =>
+      authService.verifyAndUpdatePassword({ email, code, new_password }),
   });
 };
 

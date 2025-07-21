@@ -34,10 +34,16 @@ import AssessmentJudge2 from './pages/Module2/assessment_judge2';
 
 import MySubmissions from './pages/MySubmissions';
 import Achievements from './pages/Achievements';
+import Notifications from './pages/Notifications';
+import AdminCourses from './pages/Admin/Courses';
+import AdminUsers from './pages/Admin/Users';
+import AdminDashboard from './pages/AdminDashboard';
 
 
 import { AuthProvider } from './context/AuthContext';
+import { SidebarProvider } from './context/SidebarContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
@@ -68,11 +74,12 @@ function App() {
         <>
             <Toaster position="top-right" />
             <QueryClientProvider client={queryClient}>
-                <AuthProvider>
-                    <Router>
+                <Router>
+                    <AuthProvider>
+                        <SidebarProvider>
                         <Routes>
                             {/* Public routes */}
-                            <Route path="/" element={<PublicLayout><Login /></PublicLayout>} />
+                            <Route path="/" element={<Navigate to="/dashboard" replace />} />
                             <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
                             <Route path="/register" element={<PublicLayout><Register /></PublicLayout>} />
                             <Route path="/forgot-password" element={<PublicLayout><ForgotPassword /></PublicLayout>} />
@@ -84,6 +91,7 @@ function App() {
                             <Route path="/settings" element={<ProtectedRoute><DashboardLayout><Settings /></DashboardLayout></ProtectedRoute>} />
                             <Route path="/my-submissions" element={<ProtectedRoute><DashboardLayout><MySubmissions /></DashboardLayout></ProtectedRoute>} />
                             <Route path="/achievements" element={<ProtectedRoute><DashboardLayout><Achievements /></DashboardLayout></ProtectedRoute>} />
+                            <Route path="/notifications" element={<ProtectedRoute><DashboardLayout><Notifications /></DashboardLayout></ProtectedRoute>} />
 
                             {/* Module 1 routes */}
                             <Route path="/introduction" element={<ProtectedRoute><CoursesLayout><Introduction /></CoursesLayout></ProtectedRoute>} />
@@ -104,11 +112,44 @@ function App() {
                             <Route path="/assessment2" element={<ProtectedRoute><CoursesLayout><Assessment2 /></CoursesLayout></ProtectedRoute>} />
                             <Route path="/AssessmentJudge2" element={<ProtectedRoute><CoursesLayout><AssessmentJudge2 /></CoursesLayout></ProtectedRoute>} />
 
+                            {/* Admin Routes */}
+                            <Route
+                                path="/admin"
+                                element={
+                                    <ProtectedRoute requireAdmin>
+                                        <DashboardLayout>
+                                            <AdminDashboard />
+                                        </DashboardLayout>
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/admin/courses"
+                                element={
+                                    <ProtectedRoute requireAdmin>
+                                        <DashboardLayout>
+                                            <AdminCourses />
+                                        </DashboardLayout>
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/admin/users"
+                                element={
+                                    <ProtectedRoute requireAdmin>
+                                        <DashboardLayout>
+                                            <AdminUsers />
+                                        </DashboardLayout>
+                                    </ProtectedRoute>
+                                }
+                            />
+
                             {/* Catch all route */}
                             <Route path="*" element={<NotFound />} />
                         </Routes>
-                    </Router>
-                </AuthProvider>
+                        </SidebarProvider>
+                    </AuthProvider>
+                </Router>
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </>

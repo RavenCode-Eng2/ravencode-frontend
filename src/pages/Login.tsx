@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -8,22 +8,48 @@ import { useLogin } from '../hooks/useApi';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
-    const { login: authLogin } = useAuth();
+    const location = useLocation();
+    const { login: authLogin, isAuthenticated } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const loginMutation = useLogin();
 
+    // Redirect if already authenticated
+    useEffect(() => {
+        console.log('[Login] useEffect - isAuthenticated:', isAuthenticated);
+        console.log('[Login] useEffect - current location:', location);
+        
+        if (isAuthenticated) {
+            const from = location.state?.from?.pathname || '/dashboard';
+            console.log('[Login] Redirecting to:', from);
+            navigate(from, { replace: true });
+        }
+    }, [isAuthenticated, navigate, location]);
+
     const handleLogin = async () => {
         try {
+            console.log('[Login] Attempting login with email:', email);
             setError('');
-            await loginMutation.mutateAsync({ email, password });
-            // Update auth context and fetch user data
+            
+            console.log('[Login] Calling loginMutation...');
+            const result = await loginMutation.mutateAsync({ email, password });
+            console.log('[Login] Login mutation result:', result);
+            
+            console.log('[Login] Calling authLogin...');
             await authLogin();
-            navigate('/dashboard');
+            console.log('[Login] Auth login completed');
+            
         } catch (err: any) {
+            console.error('[Login] Login error:', err);
             setError(err.response?.data?.message || 'Error al iniciar sesión');
+        }
+    };
+
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && !loginMutation.isPending && email && password) {
+            handleLogin();
         }
     };
 
@@ -51,6 +77,7 @@ const Login: React.FC = () => {
                         placeholder="Ingresa tu correo electrónico"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        onKeyPress={handleKeyPress}
                     />
                     <Input
                         type="password"
@@ -59,6 +86,7 @@ const Login: React.FC = () => {
                         placeholder="Ingresa tu contraseña"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onKeyPress={handleKeyPress}
                     />
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">

@@ -41,6 +41,24 @@ export const authService = {
     return { data };
   },
 
+  refresh: async (refreshToken: string): Promise<ApiResponse<Token>> => {
+    const response = await fetch(`${config.userApiUrl}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ refresh_token: refreshToken }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail || 'Error al renovar token');
+    }
+
+    const data = await response.json();
+    return { data };
+  },
+
   // Password recovery flow
   requestRecoveryCode: async (email: string): Promise<ApiResponse<{ message: string }>> => {
     const response = await fetch(`${config.userApiUrl}/auth/recovery/request`, {
@@ -90,6 +108,23 @@ export const authService = {
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.detail || 'Error al registrar usuario');
+    }
+
+    const responseData = await response.json();
+    return { data: responseData };
+  },
+
+  logout: async (): Promise<ApiResponse<{ message: string }>> => {
+    const response = await fetch(`${config.userApiUrl}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail || 'Error al cerrar sesión');
     }
 
     const responseData = await response.json();

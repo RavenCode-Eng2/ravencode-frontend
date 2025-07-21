@@ -46,22 +46,22 @@ const AchievementCard: React.FC<AchievementCardProps> = ({
   return (
     <div
       className={`
-        relative flex flex-col gap-3 p-4 rounded-xl cursor-pointer transition-all duration-300 
+        relative flex flex-col gap-1 p-2 rounded cursor-pointer transition-all duration-300 
         ${achievement.isEarned 
-          ? `bg-gradient-to-br from-gray-800 to-gray-900 border-2 ${getRarityColor(achievement.rarity)} shadow-lg ${getRarityGlow(achievement.rarity)}` 
+          ? `bg-gradient-to-br from-gray-800 to-gray-900 border ${getRarityColor(achievement.rarity)} shadow-md ${getRarityGlow(achievement.rarity)}` 
           : 'bg-gray-800/50 border border-gray-600 opacity-60 hover:opacity-80'
         }
-        hover:scale-105 hover:shadow-xl
+        hover:scale-102 hover:shadow-lg
       `}
       onClick={() => onClick?.(achievement)}
     >
       {/* Rarity indicator */}
       {achievement.isEarned && (
-        <div className={`absolute top-2 right-2 w-3 h-3 rounded-full ${getRarityColor(achievement.rarity).replace('border-', 'bg-')}`} />
+        <div className={`absolute top-1 right-1 w-2 h-2 rounded-full ${getRarityColor(achievement.rarity).replace('border-', 'bg-')}`} />
       )}
 
       {/* Achievement Icon */}
-      <div className="w-full aspect-square bg-center bg-no-repeat bg-cover rounded-xl overflow-hidden">
+      <div className="w-full aspect-square bg-center bg-no-repeat bg-cover rounded overflow-hidden">
         {achievement.icon ? (
           <img 
             src={achievement.icon} 
@@ -70,7 +70,7 @@ const AchievementCard: React.FC<AchievementCardProps> = ({
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center">
-            <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 11-2 0 1 1 0 012 0zM7 8a1 1 0 000 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
             </svg>
           </div>
@@ -121,8 +121,8 @@ const AchievementCard: React.FC<AchievementCardProps> = ({
 
       {/* Lock overlay for unearned achievements */}
       {!achievement.isEarned && (
-        <div className="absolute inset-0 bg-black/40 rounded-xl flex items-center justify-center">
-          <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+        <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center">
+          <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
           </svg>
         </div>

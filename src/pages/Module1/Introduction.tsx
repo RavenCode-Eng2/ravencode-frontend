@@ -1,8 +1,8 @@
-import React from "react";
 import { theme } from "../../theme";
 import Button from "../../components/Button"; 
 import objetivos_image from "../../assets/images/objetivos.png";
 import { Link, useNavigate } from 'react-router-dom';
+import { getResponsiveContainer } from '../../utils/responsive';
 import { useEffect } from "react";
 
 
@@ -27,7 +27,7 @@ const Introduction = () => {
       }}
     >
       <div className="layout-container flex h-full grow flex-col">
-        <div className="px-40 flex flex-1 justify-center py-5">
+        <div className={getResponsiveContainer()}>
           <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div className="flex flex-wrap gap-2 p-4">
               <Link
