@@ -47,6 +47,51 @@ const makeAuthenticatedRequest = async (url: string, options: RequestInit = {}):
 };
 
 export const achievementService = {
+  // Admin API methods
+  
+  // Get all achievements (admin only)
+  getAllAchievementsAdmin: async (): Promise<ApiResponse<ApiAchievementRecord[]>> => {
+    try {
+      // Try the admin endpoint first
+      const response = await makeAuthenticatedRequest(`${config.achievementsApiUrl}/admin/achievements`);
+
+      if (!response.ok) {
+        // If admin endpoint doesn't exist (404), throw a specific error
+        if (response.status === 404) {
+          throw new Error('Admin endpoint not implemented yet. Please ask your backend team to implement GET /admin/achievements');
+        }
+        const error = await response.json();
+        throw new Error(error.message || 'Error al obtener todos los logros');
+      }
+
+      const responseData = await response.json();
+      
+      // Handle potentially nested response structure
+      const achievements = responseData.data || responseData;
+      return { data: Array.isArray(achievements) ? achievements : [] };
+    } catch (error) {
+      // For now, return empty array with helpful error message
+      console.warn('[achievementService] Admin endpoint not available:', error);
+      throw new Error('Admin endpoint not implemented yet. The /admin/achievements endpoint needs to be implemented by the backend team.');
+    }
+  },
+
+  // Get achievements for a specific user (admin view)
+  getUserAchievementsAdmin: async (email: string): Promise<ApiResponse<ApiAchievementRecord[]>> => {
+    const response = await makeAuthenticatedRequest(`${config.achievementsApiUrl}/admin/achievements/user/${encodeURIComponent(email)}`);
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Error al obtener logros del usuario');
+    }
+
+    const responseData = await response.json();
+    
+    // Handle potentially nested response structure
+    const achievements = responseData.data?.achievements || responseData.achievements || responseData.data || responseData;
+    return { data: Array.isArray(achievements) ? achievements : [] };
+  },
+
   // New API methods for achievements service
   
   // Get user's achievements from the new API

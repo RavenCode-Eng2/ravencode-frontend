@@ -37,6 +37,7 @@ import Achievements from './pages/Achievements';
 import Notifications from './pages/Notifications';
 import AdminCourses from './pages/Admin/Courses';
 import AdminUsers from './pages/Admin/Users';
+import AdminAchievements from './pages/Admin/Achievements';
 import AdminDashboard from './pages/AdminDashboard';
 
 
@@ -139,6 +140,16 @@ function App() {
                                     <ProtectedRoute requireAdmin>
                                         <DashboardLayout>
                                             <AdminUsers />
+                                        </DashboardLayout>
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/admin/achievements"
+                                element={
+                                    <ProtectedRoute requireAdmin>
+                                        <DashboardLayout>
+                                            <AdminAchievements />
                                         </DashboardLayout>
                                     </ProtectedRoute>
                                 }

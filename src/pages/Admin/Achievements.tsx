@@ -485,19 +485,25 @@ const AdminAchievements: React.FC = () => {
       setLoading(true);
       setError(null);
       
-      // For now, we'll need to get all achievements from all users
-      // This would need to be replaced with an admin-specific endpoint
-      const response = await achievementService.getUserAchievementsByEmail(''); // This needs admin endpoint
+      // Get all achievements using admin endpoint
+      const response = await achievementService.getAllAchievementsAdmin();
       console.log('Admin achievements response:', response);
       
       if (Array.isArray(response.data)) {
-        setAchievements(response.data);
+        // Transform API data to admin format
+        const adminAchievements: AdminAchievementRecord[] = response.data.map(achievement => ({
+          ...achievement,
+          user_email: achievement.email,
+          user_name: (achievement as any).user_name || '', // This should come from the API
+        }));
+        setAchievements(adminAchievements);
       } else {
         setAchievements([]);
       }
     } catch (err) {
       console.error('Error loading achievements:', err);
-      setError(err instanceof Error ? err.message : 'Error al cargar logros');
+      const errorMessage = err instanceof Error ? err.message : 'Error al cargar logros';
+      setError(errorMessage);
       setAchievements([]);
     } finally {
       setLoading(false);
@@ -599,7 +605,34 @@ const AdminAchievements: React.FC = () => {
   if (error) {
     return (
       <div className="flex min-h-screen items-center justify-center" style={{ background: theme.colors.background.main }}>
-        <div className="text-red-500">{error}</div>
+        <div className="max-w-2xl mx-auto p-6 bg-red-900/20 border border-red-500/30 rounded-lg">
+          <div className="flex items-center gap-3 mb-4">
+            <svg className="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+            <h3 className="text-red-400 text-lg font-semibold">Error cargando logros</h3>
+          </div>
+          <div className="text-red-300 mb-4">{error}</div>
+          {error.includes('Admin endpoint not implemented') && (
+            <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mt-4">
+              <h4 className="text-blue-400 font-semibold mb-2">📋 Para el equipo de Backend:</h4>
+              <div className="text-blue-300 text-sm space-y-2">
+                <p>Necesitas implementar estos endpoints en tu API:</p>
+                <ul className="list-disc list-inside ml-4 space-y-1">
+                  <li><code className="bg-gray-800 px-2 py-1 rounded">GET /admin/achievements</code> - Obtener todos los logros</li>
+                  <li><code className="bg-gray-800 px-2 py-1 rounded">GET /admin/achievements/user/{'{email}'}</code> - Logros de usuario específico</li>
+                </ul>
+                <p>Consulta el archivo <code className="bg-gray-800 px-2 py-1 rounded">src/types/achievementApi.ts</code> para ver las estructuras de datos esperadas.</p>
+              </div>
+            </div>
+          )}
+          <button 
+            onClick={loadAchievements}
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+          >
+            🔄 Reintentar
+          </button>
+        </div>
       </div>
     );
   }

@@ -57,9 +57,12 @@ const AdminDashboard: React.FC = () => {
                 <div className="bg-[#283039] rounded-xl p-6">
                     <h2 className="text-xl font-semibold text-white mb-3">Gestión de Logros</h2>
                     <p className="text-gray-400 mb-4">Administra los logros y diplomas disponibles.</p>
-                    <button className="bg-[#0b79ee] text-white px-4 py-2 rounded-lg hover:bg-[#096ad4] transition-colors">
+                    <a 
+                        href="/admin/achievements" 
+                        className="inline-block bg-[#0b79ee] text-white px-4 py-2 rounded-lg hover:bg-[#096ad4] transition-colors"
+                    >
                         Administrar Logros
-                    </button>
+                    </a>
                 </div>
 
                 {/* System Settings Card */}
