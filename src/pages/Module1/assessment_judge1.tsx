@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { theme } from "../../theme";
 import Button from "../../components/Button";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 
 import { judgeService, SubmissionResponse } from "../../services/judgeService";
 import toast from "react-hot-toast";
@@ -132,7 +132,6 @@ const AssessmentJudge1: React.FC = () => {
       console.log("Obteniendo lista de problemas...");
       const problems = await judgeService.getProblems();
       console.log("Problemas obtenidos:", problems);
-
       const promedioProblem = problems.find(p => p.title === "Cálculo de Promedio");
       console.log("Problema encontrado:", promedioProblem);
 
